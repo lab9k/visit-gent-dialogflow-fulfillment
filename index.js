@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const fulfillment = require('./middleware/fulfillment');
+const fulfillment = require('./src/fulfillment');
 
 const app = express();
 app.use(bodyParser.json());
