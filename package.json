@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/lab9k/visit-gent-dialogflow-fulfillment#readme",
   "dependencies": {
+    "actions-on-google": "^2.8.0",
     "dialogflow-fulfillment": "^0.6.1",
     "koa": "^2.7.0"
   },
