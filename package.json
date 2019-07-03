@@ -20,7 +20,7 @@
   "dependencies": {
     "actions-on-google": "^2.8.0",
     "dialogflow-fulfillment": "^0.6.1",
-    "koa": "^2.7.0"
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "eslint": "^6.0.1",

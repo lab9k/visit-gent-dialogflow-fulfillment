@@ -8,8 +8,7 @@ const intentMap = new Map();
 intentMap.set('bot.events', events);
 
 
-module.exports = (ctx) => {
-  const { request, response } = ctx;
+module.exports = (request, response) => {
   const agent = new WebhookClient({ request, response });
   agent.handleRequest(intentMap);
 };
