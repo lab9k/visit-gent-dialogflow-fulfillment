@@ -22,11 +22,9 @@
     "firebase-functions": "^3.0.2"
   },
   "devDependencies": {
-    "@lab9k/eslint-config": "^1.0.4",
-    "eslint": "^6.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
     "eslint-plugin-import": "^2.18.0",
-    "eslint-plugin-node": "^9.1.0",
-    "eslint-plugin-promise": "^4.2.1",
     "prettier": "^1.18.2",
     "prettier-eslint": "^9.0.0"
   }
