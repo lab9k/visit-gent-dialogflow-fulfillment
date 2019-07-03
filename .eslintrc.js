@@ -1,4 +1,4 @@
-{
+module.exports = {
   "env": {
     "es6": true,
     "node": true
@@ -12,5 +12,7 @@
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
-  "rules": {}
+  "rules": {
+    "no-console": process.env.NODE_ENV === 'production' ? "error" : "off"
+  }
 }
