@@ -1,8 +1,11 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const fulfillment = require('./middleware/fulfillment');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/api', fulfillment);
 
 const port = process.env.PORT || 3000;
