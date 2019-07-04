@@ -7,7 +7,7 @@ module.exports = {
     agent.add('Received your request for events successfully!');
     fetch();
     const fetched = fetch();
-    fetched.then((res) => {
+    return fetched.then((res) => {
       console.log('bot.events: result', res);
       agent.add(res);
     });
