@@ -17,10 +17,10 @@ function fetchCityLeader(cityName) {
       ${{ db: cityName }} dbo:leaderName ?leaderName
     }`)
     .execute()
-  // Get the item we want.
-    .then(response => Promise.resolve(response.results.bindings[0].leaderName.value));
+    // Get the item we want.
+    .then(response => response.results.bindings[0].leaderName.value);
 }
 
 module.exports = function fetch() {
-  return String(fetchCityLeader('Vienna'));
+  return fetchCityLeader('Vienna').then(res => String(res));
 };
