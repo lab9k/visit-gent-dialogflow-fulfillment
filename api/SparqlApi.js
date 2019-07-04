@@ -18,9 +18,12 @@ function query() {
   return client
     .query(queryText)
     .execute()
-    .then(response => response.results.bindings[0].name.value);
+    .then(response => response.results.bindings);
 }
 
 module.exports = function fetch() {
-  return query().then(res => JSON.stringify(res));
+  return query().then((res) => {
+    console.log(res);
+    return JSON.stringify(res);
+  });
 };
