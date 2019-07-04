@@ -13,8 +13,9 @@ const client = new SparqlClient('https://stad.gent/sparql')
     foaf: 'http://xmlns.com/foaf/0.1/',
   });
 
-function query() {
-  const queryText = build();
+function query(time) {
+  const queryText = build(time);
+  console.log(queryText);
   return client
     .query(queryText)
     .execute()
@@ -22,6 +23,6 @@ function query() {
 }
 
 
-module.exports = function fetch() {
-  return query();
+module.exports = function fetch(time) {
+  return query(time);
 };
