@@ -18,11 +18,13 @@ module.exports = function build(time) {
   switch (time) {
     case 'tomorrow':
       addDays(startDate, 1);
-      addDays(startDate, 1);
+      addDays(endDate, 1);
       break;
     case 'in 2 days':
       addDays(startDate, 2);
-      addDays(startDate, 2);
+      addDays(endDate, 2);
+      break;
+    default:
       break;
   }
 

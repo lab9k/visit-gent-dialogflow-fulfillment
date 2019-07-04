@@ -5,7 +5,7 @@ module.exports = {
   key: 'bot.events',
   handler(agent) {
     agent.add('Received your request for events successfully!');
-    fetch();
+    console.log(agent.parameters.time);
     const fetched = fetch(agent.parameters.time);
     return fetched.then((res) => {
       console.log('bot.events: result', res);
