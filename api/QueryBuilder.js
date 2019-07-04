@@ -28,9 +28,6 @@ module.exports = function build(time) {
     default:
       break;
   }
-
-  console.log(startDate);
-
   const query = QueryType.event;
   const lang = 'en';
   return query

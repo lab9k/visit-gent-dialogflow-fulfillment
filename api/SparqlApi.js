@@ -18,7 +18,7 @@ function query(time) {
   return client
     .query(queryText)
     .execute()
-    .then(response => response.results.bindings[0]);
+    .then(response => response.results.bindings);
 }
 
 
