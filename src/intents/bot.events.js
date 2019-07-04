@@ -8,6 +8,7 @@ module.exports = {
     const fetched = fetch(agent.parameters.time);
     return fetched.then((res) => {
       res.forEach((element) => {
+        console.log(element);
         const card = new EventCard(element);
         agent.add(card);
       });
