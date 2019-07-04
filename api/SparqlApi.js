@@ -18,7 +18,6 @@ function query() {
   return client
     .query(queryText)
     .execute()
-    // Get the item we want.
     .then(response => response.results.bindings[0].name.value);
 }
 
