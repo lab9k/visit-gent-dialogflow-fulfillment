@@ -6,7 +6,7 @@ module.exports = {
   handler(agent) {
     agent.add('Received your request for events successfully!');
     fetch();
-    const fetched = fetch(agent.parameters.time);
+    const fetched = fetch(agent.queryResult.parameters.time);
     return fetched.then((res) => {
       console.log('bot.events: result', res);
       const card = new EventCard(res);
