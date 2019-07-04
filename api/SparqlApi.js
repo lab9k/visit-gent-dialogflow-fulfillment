@@ -22,5 +22,5 @@ function query() {
 }
 
 module.exports = function fetch() {
-  return query().then(res => String(res));
+  return query().then(res => JSON.stringify(res));
 };
