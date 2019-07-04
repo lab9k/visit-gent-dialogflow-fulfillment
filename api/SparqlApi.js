@@ -18,7 +18,7 @@ function query() {
   return client
     .query(queryText)
     .execute()
-    .then(response => response.results.bindings[0].name.value);
+    .then(response => response.results.bindings);
 }
 
 module.exports = function fetch() {
