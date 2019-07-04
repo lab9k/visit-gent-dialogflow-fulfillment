@@ -6,6 +6,6 @@ module.exports = {
   handler(agent) {
     agent.add('Received your request for events successfully!');
     // fetch().then(res => agent.add(res));
-    agent.add(fetch());
+    agent.add(`Events: ${fetch()}`);
   },
 };
