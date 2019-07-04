@@ -14,5 +14,5 @@ const fetch = require('./api/SparqlApi');
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
-  fetch().then(res => console.log(res));
+  fetch('in 2 days').then(res => console.log(res));
 });
