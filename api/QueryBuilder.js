@@ -1,14 +1,18 @@
 /* eslint-disable no-unused-vars */
-import { QueryType } from './queries';
+const { QueryType } = require('./queries/index');
 
-class QueryBuilder {
-  build(type) {
-    const query = QueryType(type);
-    const startDateStr = new Date().format('YYYY-MM-DD');
-    const endDateStr = new Date().format('YYYY-MM-DD');
-
-    return this.query
-      .replace(/{% startDate %}/g, startDateStr)
-      .replace(/{% endDate %}/g, endDateStr);
-  }
+function formatDate(date) {
+  // Format: YYYY/MM/DD
+  return `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
 }
+
+module.exports = function build() {
+  const query = QueryType.event;
+  const startDate = new Date();
+  const endDate = new Date();
+  const lang = 'en';
+  return query
+    .replace(/{% startDate %}/g, formatDate(startDate))
+    .replace(/{% endDate %}/g, formatDate(endDate))
+    .replace(/{% lang %}/g, lang);
+};

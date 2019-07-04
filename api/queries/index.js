@@ -1,10 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 const QueryType = {
-  Event:
-  `PREFIX schema: <http://schema.org/>
-  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-  PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-  SELECT
+  event:
+  `SELECT
     ?attraction
     ?name
     ?description
@@ -26,7 +23,7 @@ const QueryType = {
     ?spec schema:validThrough ?outTo.
     FILTER (?outFrom <= "{% startDate %}"^^xsd:date)
     FILTER (?outTo >= "{% endDate %}"^^xsd:date)
-    FILTER (langMatches(lang(?name), {% lang %})) .
+    FILTER (langMatches(lang(?name), "{% lang %}")) .
     FILTER (langMatches(lang(?name), lang(?description))) .
     {
       SELECT ?to ?from WHERE {
@@ -39,7 +36,7 @@ const QueryType = {
       } GROUP BY ?from ?to
     }
   }`,
-  Attractions: `
+  attractions: `
   PREFIX schema: <http://schema.org/>
   PREFIX n3: <http://schema.org/>
   SELECT
@@ -58,3 +55,5 @@ const QueryType = {
     FILTER (langMatches(lang(?name), {% lang %})) .
   } GROUP BY ?attraction ?name ?description ?url`,
 };
+
+module.exports = { QueryType };
