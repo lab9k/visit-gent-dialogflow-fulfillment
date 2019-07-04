@@ -8,6 +8,7 @@ const client = new SparqlClient('http://dbpedia.org/sparql')
     dbo: 'http://dbpedia.org/ontology/',
   });
 
+// eslint-disable-next-line no-unused-vars
 function fetchCityLeader(cityName) {
   return client
     .query(SPARQL`
