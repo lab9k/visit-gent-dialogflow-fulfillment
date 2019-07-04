@@ -7,9 +7,10 @@ function formatDate(date) {
   return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
-function addDays(date, days) {
-  return date.setDate(date.getDate + days);
-}
+// eslint-disable-next-line no-extend-native
+Date.prototype.addDays = function (days) {
+  return this.setDate(this.getDate() + days);
+};
 
 module.exports = function build(time) {
   const startDate = new Date();
@@ -17,16 +18,18 @@ module.exports = function build(time) {
 
   switch (time) {
     case 'tomorrow':
-      addDays(startDate, 1);
-      addDays(endDate, 1);
+      startDate.addDays(1);
+      endDate.addDays(1);
       break;
     case 'in 2 days':
-      addDays(startDate, 2);
-      addDays(endDate, 2);
+      startDate.addDays(2);
+      endDate.addDays(2);
       break;
     default:
       break;
   }
+
+  console.log(startDate);
 
   const query = QueryType.event;
   const lang = 'en';
