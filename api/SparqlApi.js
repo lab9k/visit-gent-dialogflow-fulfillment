@@ -23,25 +23,5 @@ function query() {
 
 
 module.exports = function fetch() {
-  const resultQuery = query();
-  const result = `"messages": [{"platform"="facebook","speeck": "${resultQuery.name}","type": 0}]`;
-
-  /* "messages": [
-  {
-    "buttons": [
-      {
-        "postback": "Card Link URL or text",
-        "text": "Card Link Title"
-      }
-    ],
-    "imageUrl": "http://urltoimage.com",
-    "platform": "facebook",
-    "subtitle": "Card Subtitle",
-    "title": "Card Title",
-    "type": 1
-  }
-]
- */
-
-  return JSON.parse(result);
+  return query();
 };

@@ -1,5 +1,5 @@
 const fetch = require('../../api/SparqlApi');
-
+const EventCard = require('../models/EventCard');
 
 module.exports = {
   key: 'bot.events',
@@ -9,8 +9,8 @@ module.exports = {
     const fetched = fetch();
     return fetched.then((res) => {
       console.log('bot.events: result', res);
-      agent.add(res);
+      const card = new EventCard(res);
+      agent.add(card);
     });
-    // agent.add(`Events: ${fetch()}`);
   },
 };
