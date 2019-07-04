@@ -13,7 +13,7 @@ const client = new SparqlClient('https://stad.gent/sparql')
     foaf: 'http://xmlns.com/foaf/0.1/',
   });
 
-async function query() {
+function query() {
   const queryText = build();
   return client
     .query(queryText)
