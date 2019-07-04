@@ -15,6 +15,7 @@ const client = new SparqlClient('https://stad.gent/sparql')
 
 function query(time) {
   const queryText = build(time);
+  console.log(queryText);
   return client
     .query(queryText)
     .execute()
