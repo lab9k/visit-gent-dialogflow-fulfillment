@@ -7,6 +7,7 @@ const AttractionCard = require('../models/AttractionCard');
 module.exports = {
   key: 'bot.attractions',
   handler(agent) {
+    console.log(this.key);
     agent.add(i18n.__('Looking for attractions'));
     agent.add(new Suggestion('Nightlife'));
     agent.add(new Suggestion('Museums'));

@@ -6,23 +6,21 @@ const { QueryType } = require('./queries/index');
 function formatDate(date) {
   // Format: YYYY/MM/DD
   // Month + 1 because Javascript starts at 0
-  // TODO: delete comment multiple events
-  // return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-  return `${date.getFullYear()}`;
+  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
-// eslint-disable-next-line no-extend-native
+
 Date.prototype.addDays = function (days) {
   return this.setDate(this.getDate() + days);
 };
 
-function getAttractions() {
+function getAttractionQuery() {
   const query = QueryType.attractions;
   return query
     .replace(/{% lang %}/g, i18n.getLocale());
 }
 
-function getEvents(time) {
+function getEventQuery(time) {
   const startDate = new Date();
   const endDate = new Date();
 
@@ -49,10 +47,10 @@ module.exports = function build(type, time) {
   let res;
   switch (type) {
     case 'bot.events':
-      res = getEvents(time);
+      res = getEventQuery(time);
       break;
     case 'bot.attractions':
-      res = getAttractions();
+      res = getAttractionQuery();
       break;
     default:
       res = '';
