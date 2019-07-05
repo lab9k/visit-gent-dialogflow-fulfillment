@@ -45,7 +45,7 @@ function getEvents(time) {
     .replace(/{% lang %}/g, lang);
 }
 
-module.exports = function build(time) {
+module.exports = function build(type, time) {
   return getEvents(time);
   /* switch (type) {
     case 'bot.events':
