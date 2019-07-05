@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { Suggestion, PLATFORMS } = require('dialogflow-fulfillment');
 const fulfillment = require('./src/fulfillment');
 
 const fetch = require('./api/SparqlApi');
@@ -15,6 +16,6 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
   fetch('bot.attractions').then((res) => {
     const card = new AttractionCard(res[0]);
-    console.log(card);
+    console.log(new Suggestion('yess').setPlatform(PLATFORMS.FACEBOOK));
   });
 });
