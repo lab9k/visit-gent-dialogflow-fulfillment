@@ -14,7 +14,10 @@ const QueryType = require('./queries/index');
   }); */
 
 const client = new SparqlClient('https://stad.gent/sparql')
-  .register({});
+  .register({
+    db: 'http://dbpedia.org/resource/',
+    dbo: 'http://dbpedia.org/ontology/',
+  });
 
 function query(type, time) {
   const queryText = build(type, time);
