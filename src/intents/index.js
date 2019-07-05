@@ -9,6 +9,6 @@ const attractions = require('./bot.attractions');
 }); */
 
 intentMap.set('bot.events', events.handler);
-intentMap.set('bot.attractions', attractions);
+intentMap.set('bot.attractions', attractions.handler);
 
 module.exports = intentMap;

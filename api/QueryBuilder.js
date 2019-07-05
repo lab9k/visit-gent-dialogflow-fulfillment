@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 const { QueryType } = require('./queries/index');
 
+const lang = 'en';
+
 function formatDate(date) {
   // Format: YYYY/MM/DD
   // Month + 1 because Javascript starts at 0
@@ -14,7 +16,24 @@ Date.prototype.addDays = function (days) {
   return this.setDate(this.getDate() + days);
 };
 
-module.exports = function build(time) {
+module.exports = function build(type, time) {
+  switch (type) {
+    case QueryType.event:
+      return this.getEvents(time);
+    case QueryType.attractions:
+      return this.getAttractions();
+    default:
+      return null;
+  }
+};
+
+function getAttractions() {
+  const query = QueryType.attractions;
+  return query
+    .replace(/{% lang %}/g, lang);
+}
+
+function getEvents(time) {
   const startDate = new Date();
   const endDate = new Date();
 
@@ -31,9 +50,8 @@ module.exports = function build(time) {
       break;
   }
   const query = QueryType.event;
-  const lang = 'en';
   return query
     .replace(/{% startDate %}/g, formatDate(startDate))
     .replace(/{% endDate %}/g, formatDate(endDate))
     .replace(/{% lang %}/g, lang);
-};
+}

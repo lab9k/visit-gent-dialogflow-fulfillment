@@ -1,7 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 const QueryType = {
   event:
-  `SELECT
+  `PREFIX schema: <http://schema.org/>
+  PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+  PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+  SELECT
     ?attraction
     ?name
     ?description
