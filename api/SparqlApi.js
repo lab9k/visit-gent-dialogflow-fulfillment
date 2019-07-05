@@ -3,7 +3,8 @@ const build = require('./QueryBuilder');
 
 const client = new SparqlClient('https://stad.gent/sparql').register({
   schema: 'http://schema.org/',
-  n3: 'http://schema.org/',
+  xsd: 'http://www.w3.org/2001/XMLSchema#',
+  foaf: 'http://xmlns.com/foaf/0.1/',
 });
 
 function query(type, time) {
@@ -15,6 +16,6 @@ function query(type, time) {
 }
 
 
-module.exports = function fetch(type, time) {
-  return query(type, time);
+module.exports = function fetch(time) {
+  return query(time);
 };

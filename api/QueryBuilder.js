@@ -45,13 +45,14 @@ function getEvents(time) {
     .replace(/{% lang %}/g, lang);
 }
 
-module.exports = function build(type, time) {
-  switch (type) {
+module.exports = function build(time) {
+  return getEvents(time);
+  /* switch (type) {
     case 'bot.events':
       return getEvents(time);
     case 'bot.attractions':
       return getAttractions();
     default:
       return null;
-  }
+  } */
 };
