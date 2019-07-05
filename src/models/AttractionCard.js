@@ -3,7 +3,7 @@ const { Card } = require('dialogflow-fulfillment');
 module.exports = class EventCard extends Card {
   constructor(binding) {
     super(binding.name.value);
-    this.setImage(binding.imagesList[0].value);
+    this.setImage(binding.image.value);
     this.setText(binding.description.value);
     this.setButton({ text: 'Go to website.', url: binding.page.value });
   }
