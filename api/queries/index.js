@@ -55,7 +55,7 @@ const QueryType = {
     ?attraction n3:url ?url .
     ?attraction n3:image ?image .
     FILTER (langMatches(lang(?name), lang(?description))) .
-    FILTER (langMatches(lang(?name), {% lang %})) .
+    FILTER (langMatches(lang(?name), "{% lang %}")) .
   } GROUP BY ?attraction ?name ?description ?url`,
 };
 

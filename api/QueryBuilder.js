@@ -16,21 +16,14 @@ Date.prototype.addDays = function (days) {
   return this.setDate(this.getDate() + days);
 };
 
-module.exports = function build(type, time) {
-  switch (type) {
-    case QueryType.event:
-      return this.getEvents(time);
-    case QueryType.attractions:
-      return this.getAttractions();
-    default:
-      return null;
-  }
-};
-
 function getAttractions() {
   const query = QueryType.attractions;
-  return query
+  query
     .replace(/{% lang %}/g, lang);
+  console.log(query.replace(/{% lang %}/g, lang));
+  return query;
+  /* return query
+    .replace(/{% lang %}/g, lang); */
 }
 
 function getEvents(time) {
@@ -55,3 +48,14 @@ function getEvents(time) {
     .replace(/{% endDate %}/g, formatDate(endDate))
     .replace(/{% lang %}/g, lang);
 }
+
+module.exports = function build(type, time) {
+  switch (type) {
+    case 'bot.events':
+      return getEvents(time);
+    case 'bot.attractions':
+      return getAttractions();
+    default:
+      return null;
+  }
+};
