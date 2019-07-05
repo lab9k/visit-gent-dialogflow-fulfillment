@@ -4,7 +4,6 @@ const EventCard = require('../models/EventCard');
 module.exports = {
   key: 'bot.events',
   handler(agent) {
-    agent.add();
     agent.add('Looking for events.');
     const fetched = fetch('bot.events', agent.parameters.time);
     return fetched.then((res) => {
