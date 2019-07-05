@@ -6,7 +6,9 @@ module.exports = {
   key: 'bot.attractions',
   handler(agent) {
     agent.add('Looking for attractions.');
-    agent.add(new Suggestion('TEST'));
+    agent.add(new Suggestion('Nightlife'));
+    agent.add(new Suggestion('Museums'));
+    agent.add(new Suggestion('Food'));
     const fetched = fetch('bot.attractions', agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
