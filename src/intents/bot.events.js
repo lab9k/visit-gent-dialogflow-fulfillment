@@ -14,7 +14,7 @@ module.exports = {
       let i;
       let card;
       console.log(res);
-      for (i = 0; i < 3 || i < res.length; i += 1) {
+      for (i = 0; i < 3 && i < res.length; i += 1) {
         card = new EventCard(res[i]);
         agent.add(card);
       }
