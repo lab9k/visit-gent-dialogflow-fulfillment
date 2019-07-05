@@ -7,10 +7,17 @@ module.exports = {
     agent.add('Received your request for events successfully!');
     const fetched = fetch(agent.parameters.time);
     return fetched.then((res) => {
-      res.forEach((element) => {
+      let i;
+
+      // return top 3 events
+      for (i = 0; i < 4; i += 1) {
+        const card = new EventCard(res[i]);
+        agent.add(card);
+      }
+      /* res.forEach((element) => {
         const card = new EventCard(element);
         agent.add(card);
-      });
+      }); */
     });
   },
 };

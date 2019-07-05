@@ -4,7 +4,7 @@ const { QueryType } = require('./queries/index');
 function formatDate(date) {
   // Format: YYYY/MM/DD
   // Month + 1 because Javascript starts at 0
-  // TODO: delete comment
+  // TODO: delete comment multiple events
   // return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
   return `${date.getFullYear()}`;
 }
