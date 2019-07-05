@@ -46,13 +46,12 @@ function getEvents(time) {
 }
 
 module.exports = function build(type, time) {
-  return getEvents(time);
-  /* switch (type) {
+  switch (type) {
     case 'bot.events':
       return getEvents(time);
     case 'bot.attractions':
       return getAttractions();
     default:
       return null;
-  } */
+  }
 };
