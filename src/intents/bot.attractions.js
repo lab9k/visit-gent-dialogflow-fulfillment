@@ -7,12 +7,16 @@ const AttractionCard = require('../models/AttractionCard');
 module.exports = {
   key: 'bot.attractions',
   handler(agent) {
-    console.log(this.key);
     agent.add(i18n.__('Looking for attractions'));
+
+    // Example of choosing a category
+    agent.add('Choose a category: ');
     agent.add(new Suggestion('Nightlife'));
-    agent.add(new Suggestion('Museums'));
+    agent.add(new Suggestion('Culture'));
     agent.add(new Suggestion('Food'));
-    const fetched = fetch('bot.attractions', agent.parameters.time);
+
+
+    const fetched = fetch('bot.attractions', null);
     return fetched.then((res) => {
       // return top 3 events
       agent.add(`${i18n.__('Top 3 attractions')}: `);
