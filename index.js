@@ -23,7 +23,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
   const greeting = i18n.__('Hello');
-  console.log(greeting);
+  console.log(i18n.getLocale());
   fetch('bot.attractions').then((res) => {
     const card = new AttractionCard(res[0]);
   });
