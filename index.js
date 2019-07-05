@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const fulfillment = require('./src/fulfillment');
 
 const fetch = require('./api/SparqlApi');
-const botEvents = require('./src/intents/bot.events');
+const AttractionCard = require('./src/models/AttractionCard');
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,5 +13,8 @@ app.post('/api', fulfillment);
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
-  fetch(botEvents.key, 'today').then(res => console.log(res));
+  fetch('bot.attractions').then((res) => {
+    const card = new AttractionCard(res[0]);
+    console.log(card);
+  });
 });
