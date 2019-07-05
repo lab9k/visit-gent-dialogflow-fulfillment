@@ -4,6 +4,7 @@ const i18n = require('i18n');
 
 module.exports = class EventCard extends Card {
   constructor(binding) {
+    console.log(binding);
     super(binding.name.value);
     this.setImage(binding.image.value);
     this.setText(`${i18n.__('From')}: ${binding.fromMin.value}

@@ -13,7 +13,7 @@ module.exports = {
       agent.add(`${i18n.__('Top 3 events')} ${agent.parameters.time}: `);
       let i;
       let card;
-      for (i = 0; i < 3; i += 1) {
+      for (i = 0; i < 3 || i < res.lenght; i += 1) {
         card = new EventCard(res[i]);
         agent.add(card);
       }
