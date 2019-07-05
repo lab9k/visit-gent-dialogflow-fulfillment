@@ -1,10 +1,10 @@
 const fetch = require('../../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
-const QueryType = require('./../../api/queries/index');
 
 module.exports = {
   key: 'bot.attractions',
   handler(agent) {
+    console.log('Logger: handler');
     agent.add('Looking for attractions.');
     const fetched = fetch(this.key, agent.parameters.time);
     return fetched.then((res) => {

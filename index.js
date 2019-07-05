@@ -12,7 +12,7 @@ app.post('/api', fulfillment);
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
-  fetch('bot.attractions').then(res => console.log(res[0]));
-  // const card = new AttractionCard(fetch('bot.attraction')[0]);
-  // console.log(card);
+  fetch('bot.attractions').then((res) => {
+    console.log(res[0]);
+  });
 });

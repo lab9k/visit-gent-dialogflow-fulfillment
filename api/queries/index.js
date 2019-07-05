@@ -39,8 +39,8 @@ const QueryType = {
       } GROUP BY ?from ?to
     }
   }`,
-  attractions: `
-  PREFIX schema: <http://schema.org/>
+  attractions:
+  `PREFIX schema: <http://schema.org/>
   PREFIX n3: <http://schema.org/>
   SELECT
     ?attraction
