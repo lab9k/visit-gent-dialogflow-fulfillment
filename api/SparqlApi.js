@@ -9,6 +9,7 @@ const client = new SparqlClient('https://stad.gent/sparql').register({
 
 module.exports = function fetch(type, time) {
   const queryText = build(type, time);
+  console.log(queryText);
   return client
     .query(queryText)
     .execute()
