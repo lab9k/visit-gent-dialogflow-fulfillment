@@ -46,7 +46,6 @@ function getEvents(time) {
 }
 
 module.exports = function build(type, time) {
-  console.log(type);
   let res;
   switch (type) {
     case 'bot.events':
