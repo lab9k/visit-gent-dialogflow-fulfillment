@@ -5,7 +5,7 @@ module.exports = {
   key: 'bot.attractions',
   handler(agent) {
     agent.add('Looking for attractions.');
-    const fetched = fetch(this.key, agent.parameters.time);
+    const fetched = fetch('bot.attractions', agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
       agent.add('Top 3 attractions: ');
