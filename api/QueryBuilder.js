@@ -1,7 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-unused-vars */
+const i18n = require('i18n');
 const { QueryType } = require('./queries/index');
-
-const lang = 'en';
 
 function formatDate(date) {
   // Format: YYYY/MM/DD
@@ -19,7 +19,7 @@ Date.prototype.addDays = function (days) {
 function getAttractions() {
   const query = QueryType.attractions;
   return query
-    .replace(/{% lang %}/g, lang);
+    .replace(/{% lang %}/g, i18n.getLocale());
 }
 
 function getEvents(time) {
@@ -27,11 +27,11 @@ function getEvents(time) {
   const endDate = new Date();
 
   switch (time) {
-    case 'tomorrow':
+    case i18n.__('tomorrow'):
       startDate.addDays(1);
       endDate.addDays(1);
       break;
-    case 'in 2 days':
+    case i18n.__('in 2 days'):
       startDate.addDays(2);
       endDate.addDays(2);
       break;
@@ -42,7 +42,7 @@ function getEvents(time) {
   return query
     .replace(/{% startDate %}/g, formatDate(startDate))
     .replace(/{% endDate %}/g, formatDate(endDate))
-    .replace(/{% lang %}/g, lang);
+    .replace(/{% lang %}/g, i18n.getLocale());
 }
 
 module.exports = function build(type, time) {

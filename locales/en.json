@@ -1,4 +1,10 @@
 {
 	"Hello World": "Hello World",
-    "Hello": "Hello"
+    "Hello": "Hello",
+    "Looking for events": "Looking for events",
+    "Top 3 events": "Top 3 events",
+    "Looking for attractions": "Looking for attractions",
+    "Top 3 attractions" : "Top 3 attractions",
+    "tomorrow":"tommorow",
+    "in 2 days":"in 2 days"
 }
