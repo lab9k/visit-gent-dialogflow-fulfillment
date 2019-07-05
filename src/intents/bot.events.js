@@ -4,13 +4,13 @@ const EventCard = require('../models/EventCard');
 module.exports = {
   key: 'bot.events',
   handler(agent) {
-    agent.add('Received your request for events successfully!');
+    agent.add('Looking for events.');
     const fetched = fetch(agent.parameters.time);
     return fetched.then((res) => {
       let i;
-
+      agent.add(`Top 3 events ${agent.parameters.time}: `);
       // return top 3 events
-      for (i = 0; i < 4; i += 1) {
+      for (i = 0; i < 3; i += 1) {
         const card = new EventCard(res[i]);
         agent.add(card);
       }
