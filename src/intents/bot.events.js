@@ -6,7 +6,7 @@ const EventCard = require('../models/EventCard');
 module.exports = {
   key: 'bot.events',
   handler(agent) {
-    agent.add(i18n.__('Looking for events.'));
+    agent.add(i18n.__('Looking for events'));
     const fetched = fetch('bot.events', agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
