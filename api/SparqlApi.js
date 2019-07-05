@@ -14,7 +14,7 @@ const QueryType = require('./queries/index');
   }); */
 
 const client = new SparqlClient('https://stad.gent/sparql')
-  .register();
+  .register({});
 
 function query(type, time) {
   const queryText = build(type, time);
