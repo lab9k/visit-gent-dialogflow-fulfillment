@@ -18,10 +18,7 @@ Date.prototype.addDays = function (days) {
 
 function getAttractions() {
   const query = QueryType.attractions;
-  query
-    .replace(/{% lang %}/g, lang);
-  console.log(query.replace(/{% lang %}/g, lang));
-  return query;
+  return query.replace(/{% lang %}/g, lang);
   /* return query
     .replace(/{% lang %}/g, lang); */
 }
