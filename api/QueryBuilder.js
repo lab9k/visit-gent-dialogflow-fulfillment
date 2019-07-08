@@ -1,19 +1,14 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-unused-vars */
 const i18n = require('i18n');
 const dateFormat = require('dateformat');
 const { QueryType } = require('./queries/index');
 
 
 function formatDate(date) {
-  // Format: YYYY-MM-DD
+  // Format: yyyy-mm-dd
   // Month + 1 because Javascript starts at 0
   return dateFormat(date, 'yyyy-mm-dd');
 }
-
-/* Date.prototype.addDays = function (days) {
-  return this.setDate(this.getDate() + days);
-}; */
 
 function addDays(date, days) {
   return date.setDate(date.getDate() + days);
