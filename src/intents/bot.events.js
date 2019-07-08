@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 const i18n = require('i18n');
-const fetchEvents = require('../../api/SparqlApi');
+const { fetchEvents } = require('../../api/SparqlApi');
 const EventCard = require('../models/EventCard');
 
 module.exports = {

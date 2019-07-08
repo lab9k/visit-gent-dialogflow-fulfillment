@@ -11,7 +11,7 @@ module.exports = {
     // Example of choosing a category
     agent.add('Choose a category: ');
     agent.add(new Suggestion('Place to stay'));
-    agent.add(new Suggestion('Food or drinks'));
+    agent.add(new Suggestion('Food and drinks'));
     agent.add(new Suggestion('Things to see'));
   },
 };
