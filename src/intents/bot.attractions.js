@@ -15,8 +15,6 @@ module.exports = {
     agent.add(new Suggestion('Culture'));
     agent.add(new Suggestion('Food'));
 
-    console.log(agent.getContext('botattractions-followup'));
-
     /* const fetched = fetch('bot.attractions', null);
     return fetched.then((res) => {
       // return top 3 events
