@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-const i18n = require('i18n');
 const { fetchAttractions } = require('../../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
 

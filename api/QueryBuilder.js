@@ -31,11 +31,11 @@ module.exports = {
     const endDate = new Date();
 
     switch (time) {
-      case i18n.__('tomorrow'):
+      case 'tomorrow':
         addDays(startDate, 1);
         addDays(endDate, 1);
         break;
-      case i18n.__('in 2 days'):
+      case 'in 2 days':
         addDays(startDate, 2);
         addDays(endDate, 2);
         break;
