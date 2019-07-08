@@ -46,6 +46,7 @@ const QueryType = {
     ?attraction
     ?name
     ?description
+    ?type
     (IRI(?url) AS ?page)
     (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?imagesList)
   WHERE {
@@ -54,9 +55,11 @@ const QueryType = {
     ?attraction n3:description ?description .
     ?attraction n3:url ?url .
     ?attraction n3:image ?image .
+    ?attraction n3:field_poi_type ?type
     FILTER (langMatches(lang(?name), lang(?description))) .
     FILTER (langMatches(lang(?name), "{% lang %}")) .
-  } GROUP BY ?attraction ?name ?description ?url`,
+    FILTER(CONTAINS(?type, "{% type %}")).
+  } GROUP BY ?attraction ?name ?description ?url ?type`,
 };
 
 module.exports = { QueryType };

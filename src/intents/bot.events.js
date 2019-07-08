@@ -1,13 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 const i18n = require('i18n');
-const fetch = require('../../api/SparqlApi');
+const fetchEvents = require('../../api/SparqlApi');
 const EventCard = require('../models/EventCard');
 
 module.exports = {
   key: 'bot.events',
   handler(agent) {
     agent.add(i18n.__('Looking for events'));
-    const fetched = fetch('bot.events', agent.parameters.time);
+    const fetched = fetchEvents(agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
       if (res.length > 3) {

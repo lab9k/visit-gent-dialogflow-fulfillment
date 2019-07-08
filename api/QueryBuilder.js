@@ -16,13 +16,14 @@ Date.prototype.addDays = function (days) {
   return this.setDate(this.getDate() + days);
 };
 
-function getAttractionQuery() {
+module.exports = function buildAttractionQuery(category) {
   const query = QueryType.attractions;
   return query
-    .replace(/{% lang %}/g, i18n.getLocale());
-}
+    .replace(/{% lang %}/g, i18n.getLocale())
+    .replace(/{% type %}/g, category);
+};
 
-function getEventQuery(time) {
+module.exports = function buildEventQuery(time) {
   const startDate = new Date();
   const endDate = new Date();
 
@@ -43,20 +44,4 @@ function getEventQuery(time) {
     .replace(/{% startDate %}/g, formatDate(startDate))
     .replace(/{% endDate %}/g, formatDate(endDate))
     .replace(/{% lang %}/g, i18n.getLocale());
-}
-
-module.exports = function build(type, time) {
-  let res;
-  switch (type) {
-    case 'bot.events':
-      res = getEventQuery(time);
-      break;
-    case 'bot.attractions':
-      res = getAttractionQuery();
-      break;
-    default:
-      res = '';
-      break;
-  }
-  return res;
 };
