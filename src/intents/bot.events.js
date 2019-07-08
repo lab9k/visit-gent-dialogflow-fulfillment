@@ -14,12 +14,10 @@ module.exports = {
       if (res.length < 1) {
         agent.add('No events found');
       } else {
-        if (res.length > 3) {
-          agent.add(`${i18n.__('Top 3 events')} ${agent.parameters.time}: `);
-        }
+        agent.add(`${i18n.__('Top 3 events')} ${agent.parameters.time}: `);
         let i;
         let card;
-        for (i = 0; i < 3 && i < res.length; i += 1) {
+        for (i = 0; i < res.length; i += 1) {
           card = new EventCard(res[i]);
           agent.add(card);
         }

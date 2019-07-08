@@ -38,7 +38,7 @@ const QueryType = {
         ?spec schema:closes ?closes.
       } GROUP BY ?from ?to
     }
-  }`,
+  }LIMIT 3`,
   attractions:
   `PREFIX schema: <http://schema.org/>
   PREFIX n3: <http://schema.org/>
@@ -59,7 +59,8 @@ const QueryType = {
     FILTER (langMatches(lang(?name), lang(?description))) .
     FILTER (langMatches(lang(?name), "{% lang %}")) .
     FILTER(CONTAINS(?type, "{% type %}")).
-  } GROUP BY ?attraction ?name ?description ?url ?type`,
+  } GROUP BY ?attraction ?name ?description ?url ?type
+  LIMIT 3`,
 };
 
 module.exports = { QueryType };
