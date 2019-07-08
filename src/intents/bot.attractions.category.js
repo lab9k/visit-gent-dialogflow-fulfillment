@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 
 module.exports = {
-  key: 'bot.category',
+  key: 'bot.attractions.category',
   handler(agent) {
     agent.add('test received');
   },
