@@ -6,10 +6,7 @@ const { QueryType } = require('./queries/index');
 function formatDate(date) {
   // Format: YYYY/MM/DD
   // Month + 1 because Javascript starts at 0
-
-  // TO DO: delete comment
-  return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-  // return `${date.getFullYear()}`;
+  return `${date.getFullYear() - 1}/${date.getMonth() + 1}/${date.getDate()}`;
 }
 
 Date.prototype.addDays = function (days) {
