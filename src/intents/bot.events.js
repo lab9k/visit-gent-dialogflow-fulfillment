@@ -10,7 +10,9 @@ module.exports = {
     const fetched = fetch('bot.events', agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
-      agent.add(`${i18n.__('Top 3 events')} ${agent.parameters.time}: `);
+      if (res.length > 3) {
+        agent.add(`${i18n.__('Top 3 events')} ${agent.parameters.time}: `);
+      }
       let i;
       let card;
       console.log(res);
