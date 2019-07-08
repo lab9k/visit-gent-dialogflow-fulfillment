@@ -5,6 +5,6 @@ const attractionsCategory = require('./bot.attractions.category');
 
 intentMap.set('bot.events', events.handler);
 intentMap.set('bot.attractions', attractions.handler);
-intentMap.set('botattractions.botattractions-custom', attractionsCategory);
+intentMap.set('bot.attractions.category', attractionsCategory);
 
 module.exports = intentMap;
