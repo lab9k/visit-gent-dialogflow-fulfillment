@@ -21,6 +21,7 @@ module.exports = {
   },
   fetchEvents(time) {
     const query = buildEventQuery(time);
+    console.log(query);
     return fetch(query);
   },
 };

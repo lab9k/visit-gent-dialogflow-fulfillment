@@ -11,9 +11,13 @@ function formatDate(date) {
   return dateFormat(date, 'yyyy-mm-dd');
 }
 
-Date.prototype.addDays = function (days) {
+/* Date.prototype.addDays = function (days) {
   return this.setDate(this.getDate() + days);
-};
+}; */
+
+function addDays(date, days) {
+  return date.setDate(date.getDate() + days);
+}
 
 module.exports = {
   buildAttractionQuery(category) {
@@ -28,12 +32,12 @@ module.exports = {
 
     switch (time) {
       case i18n.__('tomorrow'):
-        startDate.addDays(1);
-        endDate.addDays(1);
+        addDays(startDate, 1);
+        addDays(endDate, 1);
         break;
       case i18n.__('in 2 days'):
-        startDate.addDays(2);
-        endDate.addDays(2);
+        addDays(startDate, 2);
+        addDays(endDate, 2);
         break;
       default:
         break;

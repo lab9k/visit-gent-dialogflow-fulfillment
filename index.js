@@ -20,7 +20,7 @@ i18n.configure({
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
-  fetchEvents('today').then((res) => {
+  fetchEvents('in 2 days').then((res) => {
     console.log(res);
   });
 });
