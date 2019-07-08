@@ -3,7 +3,7 @@ const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const fulfillment = require('./src/fulfillment');
 
-const fetchAttractions = require('./api/SparqlApi');
+const { fetchAttractions } = require('./api/SparqlApi');
 
 const app = express();
 app.use(bodyParser.json());

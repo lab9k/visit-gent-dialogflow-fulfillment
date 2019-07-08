@@ -16,32 +16,33 @@ Date.prototype.addDays = function (days) {
   return this.setDate(this.getDate() + days);
 };
 
-module.exports = function buildAttractionQuery(category) {
-  const query = QueryType.attractions;
-  return query
-    .replace(/{% lang %}/g, i18n.getLocale())
-    .replace(/{% type %}/g, category);
-};
+module.exports = {
+  buildAttractionQuery(category) {
+    const query = QueryType.attractions;
+    return query
+      .replace(/{% lang %}/g, i18n.getLocale())
+      .replace(/{% type %}/g, category);
+  },
+  buildEventQuery(time) {
+    const startDate = new Date();
+    const endDate = new Date();
 
-module.exports = function buildEventQuery(time) {
-  const startDate = new Date();
-  const endDate = new Date();
-
-  switch (time) {
-    case i18n.__('tomorrow'):
-      startDate.addDays(1);
-      endDate.addDays(1);
-      break;
-    case i18n.__('in 2 days'):
-      startDate.addDays(2);
-      endDate.addDays(2);
-      break;
-    default:
-      break;
-  }
-  const query = QueryType.event;
-  return query
-    .replace(/{% startDate %}/g, formatDate(startDate))
-    .replace(/{% endDate %}/g, formatDate(endDate))
-    .replace(/{% lang %}/g, i18n.getLocale());
+    switch (time) {
+      case i18n.__('tomorrow'):
+        startDate.addDays(1);
+        endDate.addDays(1);
+        break;
+      case i18n.__('in 2 days'):
+        startDate.addDays(2);
+        endDate.addDays(2);
+        break;
+      default:
+        break;
+    }
+    const query = QueryType.event;
+    return query
+      .replace(/{% startDate %}/g, formatDate(startDate))
+      .replace(/{% endDate %}/g, formatDate(endDate))
+      .replace(/{% lang %}/g, i18n.getLocale());
+  },
 };
