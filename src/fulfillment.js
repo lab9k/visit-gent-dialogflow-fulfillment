@@ -5,8 +5,6 @@ const intents = require('./intents');
 
 module.exports = (request, response) => {
   const agent = new WebhookClient({ request, response });
-  console.log(request);
-  console.log(response);
   i18n.setLocale(agent.locale);
   agent.handleRequest(intents);
 };

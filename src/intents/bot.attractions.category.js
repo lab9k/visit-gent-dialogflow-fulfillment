@@ -3,7 +3,7 @@
 const i18n = require('i18n');
 
 module.exports = {
-  key: 'bot.attractions',
+  key: 'bot.category',
   handler(agent) {
     agent.add('test receied');
   },
