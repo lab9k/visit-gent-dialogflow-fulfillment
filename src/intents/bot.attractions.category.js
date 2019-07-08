@@ -5,7 +5,7 @@ const AttractionCard = require('../models/AttractionCard');
 module.exports = {
   key: 'bot.attractions.category',
   handler(agent) {
-    agent.add('Category received');
+    agent.add(agent.parameters.category);
     const fetched = fetchAttractions(agent.parameters.category);
     return fetched.then((res) => {
       // return top 3 events
