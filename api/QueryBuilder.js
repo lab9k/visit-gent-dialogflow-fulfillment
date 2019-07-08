@@ -4,9 +4,9 @@ const i18n = require('i18n');
 const { QueryType } = require('./queries/index');
 
 function formatDate(date) {
-  // Format: YYYY/MM/DD
+  // Format: YYYY-MM-DD
   // Month + 1 because Javascript starts at 0
-  return `${date.getFullYear() - 1}/${date.getMonth() + 1}/${date.getDate()}`;
+  return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 }
 
 Date.prototype.addDays = function (days) {
