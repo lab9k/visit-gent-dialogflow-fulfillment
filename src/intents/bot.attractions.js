@@ -1,8 +1,8 @@
 /* eslint-disable no-underscore-dangle */
 const { Suggestion } = require('dialogflow-fulfillment');
 const i18n = require('i18n');
-const fetch = require('../../api/SparqlApi');
-const AttractionCard = require('../models/AttractionCard');
+/* const fetch = require('../../api/SparqlApi');
+const AttractionCard = require('../models/AttractionCard'); */
 
 module.exports = {
   key: 'bot.attractions',
