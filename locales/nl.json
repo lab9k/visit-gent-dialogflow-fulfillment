@@ -5,8 +5,6 @@
     "Top 3 events": "Top 3 evenementen",
     "Looking for attractions": "Zoeken naar attracties",
     "Top 3 attractions" : "Top 3 attracties",
-    "tomorrow":"morgen",
-    "in 2 days":"binnen 2 dagen",
     "From":"Van",
     "To":"Tot",
     "Go to website":"Ga naar website",
@@ -17,7 +15,10 @@
     "Attraction":"Attractie",
     "What kind of activity would you like to do":"Wat soort activiteit wil je doen",
     "stay":"plaatsen om overnachten",
-    "eat_drink":"plaatsen om iets te drinken of eten",
+    "eat_drink":"plaatsen om iets te eten of drinken",
     "see_do":"plaatsen om te bezoeken",
-    "Choose a category":"Kies een categorie"
+    "Choose a category":"Kies een categorie",
+    "today":"today",
+    "tomorrow":"morgen",
+    "in 2 days":"overmorgen"
 }

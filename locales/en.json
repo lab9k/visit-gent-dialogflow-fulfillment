@@ -5,8 +5,6 @@
     "Top 3 events": "Top 3 events",
     "Looking for attractions": "Looking for attractions",
     "Top 3 attractions" : "Top 3 attractions",
-    "tomorrow":"tommorow",
-    "in 2 days":"in 2 days",
     "From":"From",
     "To":"To",
     "Go to website":"Go to website",
@@ -19,5 +17,8 @@
     "stay":"places to stay",
     "eat_drink":"places to eat or drink something",
     "see_do":"places to see",
-    "Choose a category":"Choose a category"
+    "Choose a category":"Choose a category",
+    "today":"today",
+    "tomorrow":"tommorow",
+    "in 2 days":"in 2 days"
 }
