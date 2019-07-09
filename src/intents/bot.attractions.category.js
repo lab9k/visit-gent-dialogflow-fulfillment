@@ -1,15 +1,16 @@
 /* eslint-disable no-underscore-dangle */
+const i18n = require('i18n');
 const { fetchAttractions } = require('../../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
 
 function getCategoryText(category) {
   switch (category) {
     case 'stay':
-      return 'places to stay';
+      return i18n.__('stay');
     case 'eat_drink':
-      return 'places to eat or drink something';
+      return i18n.__('eat_drink');
     case 'see_do':
-      return 'places to see';
+      return i18n.__('see_do');
     default:
       return '';
   }
