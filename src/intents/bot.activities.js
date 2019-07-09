@@ -9,5 +9,6 @@ module.exports = {
     agent.add(new Suggestion(i18n.__('Event')));
     agent.add(new Suggestion(i18n.__('Attraction')));
     console.log(agent.context.get('time'));
+    agent.context.set(agent.context.get('time'));
   },
 };
