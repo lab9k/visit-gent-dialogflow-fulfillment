@@ -8,7 +8,7 @@ module.exports = {
   handler(agent) {
     agent.add(i18n.__('Looking for events'));
     const fetched = fetchEvents(agent.parameters.time);
-    console.log(agent.context.get('context'));
+    console.log(agent.context.get('time'));
     return fetched.then((res) => {
       // return top 3 events
 
