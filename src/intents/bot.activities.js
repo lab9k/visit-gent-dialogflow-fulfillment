@@ -8,5 +8,10 @@ module.exports = {
     agent.add(`${i18n.__('What kind of activity would you like to do')}?`);
     agent.add(new Suggestion(`${i18n.__('Events')} ${agent.context.get('time').parameters.time}`));
     agent.add(new Suggestion(i18n.__('Attraction')));
+    agent.context.set(
+      'test',
+      4,
+      { parameter: 'value' },
+    );
   },
 };
