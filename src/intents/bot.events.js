@@ -28,8 +28,10 @@ function list() {
   };
 
   const payload = new Payload(
-    'FACEBOOK',
+    'facebook',
     facebookJson,
+    true,
+    true,
   );
 
   return payload;
@@ -39,7 +41,7 @@ module.exports = {
   key: 'bot.events',
   handler(agent) {
     agent.add(i18n.__('Looking for events'));
-    agent.add(list());
+    agent.add(`List: ${list()}`);
     const fetched = fetchEvents(agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
