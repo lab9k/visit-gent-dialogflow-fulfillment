@@ -10,10 +10,9 @@ module.exports = {
     agent.add(new Suggestion(`${i18n.__('Events')}`));
     agent.add(new Suggestion(i18n.__('Attraction')));
 
-    const { time } = agent.context.get('time').parameters;
+    // const { time } = agent.context.get('time').parameters;
     agent.clearOutgoingContexts();
-    agent.setContext('sample context name');
-    const context = { name: 'time', lifespan: 2, parameters: { time } };
+    const context = { name: 'time', lifespan: 2, parameters: 'today' };
     agent.context.set(context);
   },
 };
