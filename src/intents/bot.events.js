@@ -10,21 +10,26 @@ module.exports = {
     agent.add(i18n.__('Looking for events'));
 
     const facebookJson = {
-      template_type: 'list',
-      top_element_style: 'compact',
+      template_type: 'generic',
       elements: [
         {
-          title: 'Classic T-Shirt Collection',
-          subtitle: 'See all our colors',
-          image_url: 'https://peterssendreceiveapp.ngrok.io/img/collection.png',
+          title: 'Welcome!',
+          image_url: 'https://petersfancybrownhats.com/company_image.png',
+          subtitle: 'We have the right hat for everyone.',
+          default_action: {
+            type: 'web_url',
+            url: 'https://petersfancybrownhats.com/view?item=103',
+            webview_height_ratio: 'tall',
+          },
           buttons: [
             {
-              title: 'View',
               type: 'web_url',
-              url: 'https://peterssendreceiveapp.ngrok.io/collection',
-              messenger_extensions: true,
-              webview_height_ratio: 'tall',
-              fallback_url: 'https://peterssendreceiveapp.ngrok.io/',
+              url: 'https://petersfancybrownhats.com',
+              title: 'View Website',
+            }, {
+              type: 'postback',
+              title: 'Start Chatting',
+              payload: 'DEVELOPER_DEFINED_PAYLOAD',
             },
           ],
         },
@@ -32,7 +37,7 @@ module.exports = {
     };
 
     agent.add(new Payload(
-      'facebook',
+      'FACEBOOK',
       facebookJson,
       true,
       true,
