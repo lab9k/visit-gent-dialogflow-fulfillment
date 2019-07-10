@@ -5,21 +5,31 @@ const { fetchEvents } = require('../../api/SparqlApi');
 const EventCard = require('../models/EventCard');
 
 function list() {
-  const googlePayloadJson = {
-    expectUserResponse: true,
-    isSsml: false,
-    noInputPrompts: [],
-    richResponse: {
-      items: [{ simpleResponse: { textToSpeech: 'hello', displayText: 'hi' } }],
-    },
-    systemIntent: {
-      intent: 'actions.intent.OPTION',
-    },
+  const facebookJson = {
+    template_type: 'list',
+    top_element_style: 'compact',
+    elements: [
+      {
+        title: 'Classic T-Shirt Collection',
+        subtitle: 'See all our colors',
+        image_url: 'https://peterssendreceiveapp.ngrok.io/img/collection.png',
+        buttons: [
+          {
+            title: 'View',
+            type: 'web_url',
+            url: 'https://peterssendreceiveapp.ngrok.io/collection',
+            messenger_extensions: true,
+            webview_height_ratio: 'tall',
+            fallback_url: 'https://peterssendreceiveapp.ngrok.io/',
+          },
+        ],
+      },
+    ],
   };
 
   const payload = new Payload(
     'FACEBOOK',
-    googlePayloadJson,
+    facebookJson,
   );
 
   return payload;
@@ -29,8 +39,8 @@ module.exports = {
   key: 'bot.events',
   handler(agent) {
     agent.add(i18n.__('Looking for events'));
-    const fetched = fetchEvents(agent.parameters.time);
     agent.add(list());
+    const fetched = fetchEvents(agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
 
