@@ -12,7 +12,7 @@ module.exports = {
 
     // const { time } = agent.context.get('time').parameters;
     // agent.context.delete();
-    const context = { name: 'time', lifespan: 2, parameters: 'today' };
+    const context = { name: 'time', lifespan: 2, parameters: { time: 'today' } };
     agent.context.set(context);
   },
 };
