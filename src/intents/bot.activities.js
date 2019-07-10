@@ -11,7 +11,7 @@ module.exports = {
     agent.add(new Suggestion(i18n.__('Attraction')));
 
     // const { time } = agent.context.get('time').parameters;
-    agent.clearOutgoingContexts();
+    agent.context.delete();
     const context = { name: 'time', lifespan: 2, parameters: 'today' };
     agent.context.set(context);
   },
