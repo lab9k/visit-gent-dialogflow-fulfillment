@@ -6,14 +6,14 @@ const AttractionCard = require('../models/AttractionCard');
 
 
 function requestLocation(location) {
-  const apiLocation = location.replace(/ /g, '+');
+  const apiLocation = `${location.replace(/ /g, '+')}+Gent`;
   return rp(`https://eu1.locationiq.com/v1/search.php?key=0a580bdfff78da&q=${apiLocation}&format=json`);
 }
 
 module.exports = {
   key: 'bot.attractions.subject.location',
   handler(agent) {
-    console.log(agent.parameters.address);
+    agent.add('Looking for attractions');
     const fetchedLocation = requestLocation(agent.parameters.address);
     const fetchedAttractions = fetchAttractions('eat_drink', agent.context.get('botattractionssubject-followup').parameters.subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
