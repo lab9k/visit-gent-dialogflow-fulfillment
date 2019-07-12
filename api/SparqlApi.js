@@ -15,8 +15,8 @@ function fetch(query) {
 }
 
 module.exports = {
-  fetchAttractions(category, subject) {
-    const query = buildAttractionQuery(category, subject);
+  fetchAttractions(subject) {
+    const query = buildAttractionQuery(subject);
     return fetch(query);
   },
   fetchEvents(time) {

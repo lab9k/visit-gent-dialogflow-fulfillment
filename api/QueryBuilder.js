@@ -19,7 +19,6 @@ module.exports = {
     const query = QueryType.attractions;
     return query
       .replace(/{% lang %}/g, i18n.getLocale())
-      .replace(/{% type %}/g, category)
       .replace(/{% subject %}/g, subject);
   },
   buildEventQuery(time) {

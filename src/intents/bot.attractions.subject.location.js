@@ -15,7 +15,7 @@ module.exports = {
   handler(agent) {
     agent.add('Looking for attractions');
     const fetchedLocation = requestLocation(agent.parameters.address);
-    const fetchedAttractions = fetchAttractions('eat_drink', agent.context.get('botattractionssubject-followup').parameters.subject);
+    const fetchedAttractions = fetchAttractions(agent.context.get('botattractionssubject-followup').parameters.subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
 
     return fetched.then((res) => {

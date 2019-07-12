@@ -54,7 +54,6 @@ const QueryType = {
     ?attraction
     ?name
     ?description
-    ?type
     ?contactPoint
     ?geometry 
     ?asWKT
@@ -67,7 +66,6 @@ const QueryType = {
     ?attraction n3:description ?description .
     ?attraction n3:url ?url .
     ?attraction n3:image ?image .
-    ?attraction n3:field_poi_type ?type .
     ?attraction schema:contactPoint ?contactPoint .
     ?contactPoint schema:geometry ?geometry .
     ?geometry geosparql:asWKT ?asWKT .
@@ -76,9 +74,8 @@ const QueryType = {
     FILTER (langMatches(lang(?name), lang(?description))) .
     FILTER (langMatches(lang(?name), "{% lang %}")) .
     FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
-    FILTER(CONTAINS(?type, "{% type %}")).
   FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
-  } GROUP BY ?attraction ?name ?description ?url ?type ?nameSubject ?contactPoint ?geometry ?asWKT`,
+  } GROUP BY ?attraction ?name ?description ?url ?nameSubject ?contactPoint ?geometry ?asWKT`,
 };
 
 module.exports = { QueryType };
