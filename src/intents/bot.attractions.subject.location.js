@@ -13,8 +13,8 @@ function requestLocation(location) {
 module.exports = {
   key: 'bot.attractions.subject.location',
   handler(agent) {
-    const fetchedLocation = requestLocation('oude houtlei 117 gent');
-    const fetchedAttractions = fetchAttractions('eat_drink', 'Cafés');
+    const fetchedLocation = requestLocation(agent.parameters.address);
+    const fetchedAttractions = fetchAttractions('eat_drink', agent.context.get('botattractionssubject-followup').subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
 
     return fetched.then((res) => {
