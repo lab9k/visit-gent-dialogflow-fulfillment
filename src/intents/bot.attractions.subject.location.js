@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-const i18n = require('i18n');
 const rp = require('request-promise');
 const { fetchAttractions } = require('../../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
@@ -26,11 +25,8 @@ module.exports = {
       let i;
       let counter = 0;
       const radius = 0.001;
-      console.log(`longitude: ${longitude + radius}:${longitude - radius}`);
-      console.log(`latitude: ${latitude + radius}:${latitude - radius}`);
       for (i = 0; i < attractions.length; i += 1) {
         const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
-        console.log(`${parseFloat(loc[0])} ${parseFloat(loc[1])}`);
         if ((parseFloat(loc[0]) < (longitude + radius)
       && parseFloat(loc[0]) > (longitude - radius))
       && (parseFloat(loc[1]) < (latitude + radius)
@@ -45,19 +41,3 @@ module.exports = {
     });
   },
 };
-
-
-/*    const fetched = fetchAttractions('eat_drink', agent.parameters.subject);
-    return fetched.then((res) => {
-      // return top 3 attractions
-      if (res.length < 1) {
-        agent.add('No attractions found');
-      } else {
-        let i;
-        let card;
-        for (i = 0; i < res.length; i += 1) {
-          card = new AttractionCard(res[i]);
-          agent.add(card);
-        }
-      }
-    }); */
