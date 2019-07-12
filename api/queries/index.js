@@ -55,9 +55,9 @@ const QueryType = {
     ?name
     ?description
     ?type
-    #?contactPoint
-    #?geometry 
-    #?asWKT
+    ?contactPoint
+    ?geometry 
+    ?asWKT
     ?nameSubject
     (IRI(?url) AS ?page)
     (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?imagesList)
@@ -68,9 +68,9 @@ const QueryType = {
     ?attraction n3:url ?url .
     ?attraction n3:image ?image .
     ?attraction n3:field_poi_type ?type .
-    #?attraction schema:contactPoint ?contactPoint .
-    #?contactPoint schema:geometry ?geometry .
-    #?geometry geosparql:asWKT ?asWKT .
+    ?attraction schema:contactPoint ?contactPoint .
+    ?contactPoint schema:geometry ?geometry .
+    ?geometry geosparql:asWKT ?asWKT .
     ?attraction dcterm:subject ?subject .
     ?subject n3:name ?nameSubject .
     FILTER (langMatches(lang(?name), lang(?description))) .
@@ -78,8 +78,7 @@ const QueryType = {
     FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
     FILTER(CONTAINS(?type, "{% type %}")).
   FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
-  } GROUP BY ?attraction ?name ?description ?url ?type ?nameSubject #?contactPoint ?geometry ?asWKT
-  LIMIT 3`,
+  } GROUP BY ?attraction ?name ?description ?url ?type ?nameSubject ?contactPoint ?geometry ?asWKT`,
 };
 
 module.exports = { QueryType };

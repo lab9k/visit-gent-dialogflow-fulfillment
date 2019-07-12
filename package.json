@@ -18,13 +18,14 @@
   },
   "homepage": "https://github.com/lab9k/visit-gent-dialogflow-fulfillment#readme",
   "dependencies": {
-    "@google/maps": "^0.5.5",
     "actions-on-google": "^2.8.0",
     "body-parser": "^1.19.0",
     "dateformat": "^3.0.3",
     "dialogflow-fulfillment": "^0.6.1",
     "express": "^4.17.1",
     "i18n": "^0.8.3",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "sparql-client-2": "^0.6.3"
   },
   "devDependencies": {
