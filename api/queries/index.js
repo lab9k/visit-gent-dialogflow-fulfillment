@@ -10,9 +10,9 @@ const QueryType = {
       ?name
       ?description
       ?page
-      ?locationPage
+      #?locationPage
       ?image
-    ?asWKT
+    #?asWKT
       (MIN(?from) as ?fromMin)
       (MAX(?to) as ?toMax)
     WHERE {
@@ -21,11 +21,11 @@ const QueryType = {
       ?attraction schema:description ?description .
       ?attraction foaf:page ?page .
       ?attraction schema:image ?image .
-      OPTIONAL { ?attraction schema:location ?location .
-                 ?location foaf:page ?locationPage} .
-      ?location schema:contactPoint ?contact .
-      ?contact schema:geometry ?geometry .
-     ?geometry geosparql:asWKT ?asWKT .
+      OPTIONAL { ?attraction schema:location ?location } .
+      #?location foaf:page ?locationPage .
+      #?location schema:contactPoint ?contact .
+      #?contact schema:geometry ?geometry .
+     #?geometry geosparql:asWKT ?asWKT .
       ?attraction schema:openingHoursSpecification ?spec.
       ?spec schema:validFrom ?outFrom.
       ?spec schema:validThrough ?outTo.

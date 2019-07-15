@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const rp = require('request-promise');
 const fulfillment = require('./src/fulfillment');
 
-const { fetchAttractions } = require('./api/SparqlApi');
+const { fetchAttractions, fetchEvents } = require('./api/SparqlApi');
 
 
 const app = express();
@@ -28,6 +28,8 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
+  fetchEvents('Today').then(res => console.log(res));
+
   const fetchedLocation = requestLocation('oude houtlei 117 gent');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
@@ -36,7 +38,6 @@ app.listen(port, () => {
     const longitude = parseFloat(location.lon);
     const attractions = res[1];
     let i;
-    console.log(attractions);
     const radius = 0.001;
     for (i = 0; i < attractions.length; i += 1) {
       const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
@@ -44,7 +45,7 @@ app.listen(port, () => {
       && parseFloat(loc[0]) > (longitude - radius))
       && (parseFloat(loc[1]) < (latitude + radius)
       && parseFloat(loc[1]) > (latitude - radius))) {
-        console.log(attractions[i].name);
+        // console.log(attractions[i].name);
       }
     }
   });
