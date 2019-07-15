@@ -43,7 +43,7 @@ const QueryType = {
           ?spec schema:closes ?closes.
         } GROUP BY ?from ?to
       }
-    }`,
+    }LIMIT 3`,
   attractions:
   `PREFIX dcterms: <http://purl.org/dc/terms/>
   PREFIX schema: <http://schema.org/>
