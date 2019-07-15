@@ -6,7 +6,8 @@ const AttractionCard = require('../models/AttractionCard');
 
 function requestLocation(location) {
   const apiLocation = `${location.replace(/ /g, '+')}+Gent`;
-  return rp(`https://eu1.locationiq.com/v1/search.php?key=0a580bdfff78da&q=${apiLocation}&format=json`);
+  return rp(`https://eu1.locationiq.com/v1/search.php?key=0a580bdfff78da&q=${apiLocation}&format=json`)
+    .catch(e => console.log(e));
 }
 
 module.exports = {
