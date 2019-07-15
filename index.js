@@ -29,13 +29,14 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
   const fetchedLocation = requestLocation('oude houtlei 117 gent');
-  const fetchedAttractions = fetchAttractions('eat_drink', 'Cafés');
+  const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
     const location = JSON.parse(res[0])[0];
     const latitude = parseFloat(location.lat);
     const longitude = parseFloat(location.lon);
     const attractions = res[1];
     let i;
+    console.log(attractions);
     const radius = 0.001;
     for (i = 0; i < attractions.length; i += 1) {
       const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');

@@ -15,7 +15,7 @@ function addDays(date, days) {
 }
 
 module.exports = {
-  buildAttractionQuery(category, subject) {
+  buildAttractionQuery(subject) {
     const query = QueryType.attractions;
     return query
       .replace(/{% lang %}/g, i18n.getLocale())
