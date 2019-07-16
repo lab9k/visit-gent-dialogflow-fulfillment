@@ -33,7 +33,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
-  // fetchEvents('Today').then(res => console.log(res));
+  fetchEvents('2019-07-18T12:00:00+02:00').then(res => console.log(res));
   const fetchedLocation = requestLocation('Ghent');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
@@ -54,7 +54,7 @@ app.listen(port, () => {
       && parseFloat(loc[0]) > (longitude - radius))
       && (parseFloat(loc[1]) < (latitude + radius)
       && parseFloat(loc[1]) > (latitude - radius))) {
-            console.log(attractions[i].name);
+            // console.log(attractions[i].name);
             counter += 1;
             // console.log(new AttractionCard(attractions[i]));
           }

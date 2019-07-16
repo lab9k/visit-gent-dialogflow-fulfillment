@@ -22,9 +22,9 @@ module.exports = {
       .replace(/{% subject %}/g, subject);
   },
   buildEventQuery(time) {
-    const startDate = new Date();
-    const endDate = new Date();
-
+    const startDate = time;
+    const endDate = time;
+    /*
     switch (time) {
       case 'tomorrow':
         addDays(startDate, 1);
@@ -36,7 +36,9 @@ module.exports = {
         break;
       default:
         break;
-    }
+    } */
+
+    console.log(formatDate(startDate));
     const query = QueryType.event;
     return query
       .replace(/{% startDate %}/g, formatDate(startDate))
