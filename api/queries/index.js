@@ -58,7 +58,7 @@ const QueryType = {
     ?geometry 
     ?asWKT
     ?nameSubject
-    (IRI(?url) AS ?page)
+    SAMPLE((IRI(?url) as ?p) as ?page)
     (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?imagesList)
   WHERE {
     ?attraction a <http://schema.org/TouristAttraction> .
@@ -75,7 +75,7 @@ const QueryType = {
     FILTER (langMatches(lang(?name), "{% lang %}")) .
     FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
   FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
-  } GROUP BY ?attraction ?name ?description ?url ?nameSubject ?contactPoint ?geometry ?asWKT`,
+  } GROUP BY ?attraction ?name ?description ?nameSubject ?contactPoint ?geometry ?asWKT`,
 };
 
 module.exports = { QueryType };

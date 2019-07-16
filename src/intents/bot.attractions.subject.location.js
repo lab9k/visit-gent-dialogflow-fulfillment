@@ -32,7 +32,7 @@ module.exports = {
           const attractions = res[1];
           let i;
           let counter = 0;
-          const radius = 0.001;
+          const radius = 0.004;
           for (i = 0; i < attractions.length; i += 1) {
             const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
             if ((parseFloat(loc[0]) < (longitude + radius)
@@ -44,7 +44,7 @@ module.exports = {
             }
           }
           if (counter === 0) {
-            agent.add('No attractions found');
+            agent.add('No attractions found in the provided neighbourhood');
           }
         }
       }

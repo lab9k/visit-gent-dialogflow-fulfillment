@@ -33,12 +33,11 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
   // fetchEvents('Today').then(res => console.log(res));
-  const fetchedLocation = requestLocation('spanjaardshoek Ghent');
+  const fetchedLocation = requestLocation('oude houtlei 117');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
     if (res[0] !== undefined) {
       const location = JSON.parse(res[0])[0];
-      console.log(location);
       if (!location.display_name.includes('Ghent')) {
         console.log('Location not found in Ghent');
       } else {
@@ -46,7 +45,7 @@ app.listen(port, () => {
         const longitude = parseFloat(location.lon);
         const attractions = res[1];
         let i;
-        const radius = 0.001;
+        const radius = 0.004;
         for (i = 0; i < attractions.length; i += 1) {
           const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
           if ((parseFloat(loc[0]) < (longitude + radius)
