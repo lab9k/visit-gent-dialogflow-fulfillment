@@ -58,7 +58,7 @@ const QueryType = {
     ?geometry 
     ?asWKT
     ?nameSubject
-    SAMPLE((IRI(?url) as ?p) as ?page)
+    (SAMPLE(IRI(?url)) as ?page)
     (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?imagesList)
   WHERE {
     ?attraction a <http://schema.org/TouristAttraction> .
