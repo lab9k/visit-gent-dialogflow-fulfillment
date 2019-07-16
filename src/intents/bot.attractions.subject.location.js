@@ -19,7 +19,6 @@ module.exports = {
     agent.add('Looking for attractions');
     const fetchedLocation = requestLocation(agent.parameters.address, agent);
     const fetchedAttractions = fetchAttractions(agent.context.get('botattractionssubject-followup').parameters.subject);
-    console.log(agent.context.get('botattractionssubject-followup').parameters.subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
 
     return fetched.then((res) => {

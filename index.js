@@ -2,6 +2,7 @@ const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const requestPromise = require('request-promise');
+const dotenv = require('dotenv');
 const fulfillment = require('./src/fulfillment');
 
 const { fetchAttractions, fetchEvents } = require('./api/SparqlApi');
@@ -12,6 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(i18n.init);
 app.post('/api', fulfillment);
+dotenv.config();
+
 
 i18n.configure({
   locales: ['en', 'nl'],
@@ -21,7 +24,7 @@ i18n.configure({
 
 function requestLocation(location) {
   const apiLocation = location.replace(/ /g, '+');
-  return requestPromise(`https://eu1.locationiq.com/v1/search.php?key=0a580bdfff78da&q=${apiLocation}&format=json`)
+  return requestPromise(`https://eu1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_API_KEY}&q=${apiLocation}&format=json`)
     .catch(e => console.log(e.message));
 }
 
