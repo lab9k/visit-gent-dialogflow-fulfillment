@@ -14,7 +14,7 @@ module.exports = {
       if (res.length < 1) {
         agent.add(i18n.__('No events found'));
       } else {
-        agent.add(`${i18n.__('Top 3 events')} ${i18n.__(agent.parameters.time)}: `);
+        agent.add(`${i18n.__('Top 3 events')}: `);
         let i;
         let card;
         for (i = 0; i < res.length; i += 1) {

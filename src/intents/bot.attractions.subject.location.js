@@ -33,13 +33,13 @@ module.exports = {
           const attractions = res[1];
           let i;
           let counter = 0;
-          const radius = 0.004;
+          const radius = 0.002;
           for (i = 0; i < attractions.length; i += 1) {
             const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
             if ((parseFloat(loc[0]) < (longitude + radius)
-      && parseFloat(loc[0]) > (longitude - radius))
-      && (parseFloat(loc[1]) < (latitude + radius)
-      && parseFloat(loc[1]) > (latitude - radius))) {
+                && parseFloat(loc[0]) > (longitude - radius))
+                && (parseFloat(loc[1]) < (latitude + radius)
+                && parseFloat(loc[1]) > (latitude - radius))) {
               counter += 1;
               agent.add(new AttractionCard(attractions[i]));
             }
