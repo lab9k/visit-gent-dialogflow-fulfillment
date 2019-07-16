@@ -1,4 +1,5 @@
 /* eslint-disable no-underscore-dangle */
+const i18n = require('i18n');
 const { fetchAttractions } = require('../../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
 
@@ -12,7 +13,7 @@ module.exports = {
       let i;
       let card;
       if (res.length < 1) {
-        agent.add('No attractions found');
+        agent.add(i18n.__('No attractions found'));
       } else {
         for (i = 0; i < res.length; i += 1) {
           card = new AttractionCard(res[i]);

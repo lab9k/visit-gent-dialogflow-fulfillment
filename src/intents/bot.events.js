@@ -12,7 +12,7 @@ module.exports = {
       // return top 3 events
 
       if (res.length < 1) {
-        agent.add('No events found');
+        agent.add(i18n.__('No events found'));
       } else {
         agent.add(`${i18n.__('Top 3 events')} ${i18n.__(agent.parameters.time)}: `);
         let i;

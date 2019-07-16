@@ -34,8 +34,8 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
   // fetchEvents('Today').then(res => console.log(res));
-  const fetchedLocation = requestLocation('oude houtlei 117');
-  const fetchedAttractions = fetchAttractions('Museums');
+  const fetchedLocation = requestLocation('Ghent');
+  const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
     if (res[0] !== undefined) {
       const location = JSON.parse(res[0])[0];
@@ -46,17 +46,20 @@ app.listen(port, () => {
         const longitude = parseFloat(location.lon);
         const attractions = res[1];
         let i;
-        const radius = 0.4;
+        let counter = 0;
+        const radius = 0.001;
         for (i = 0; i < attractions.length; i += 1) {
           const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
           if ((parseFloat(loc[0]) < (longitude + radius)
       && parseFloat(loc[0]) > (longitude - radius))
       && (parseFloat(loc[1]) < (latitude + radius)
       && parseFloat(loc[1]) > (latitude - radius))) {
-            // console.log(attractions[i].name);
-            console.log(new AttractionCard(attractions[i]));
+            console.log(attractions[i].name);
+            counter += 1;
+            // console.log(new AttractionCard(attractions[i]));
           }
         }
+        console.log(counter);
       }
     }
   });

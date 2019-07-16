@@ -23,5 +23,8 @@
     "in 2 days":"in 2 days",
     "No attractions found":"No attractions found",
     "No events found":"No events found",
-    "Events":"Events"
+    "Events":"Events",
+    "Location not found":"Location not found",
+    "Location not found in Ghent":"Location not found in Ghent",
+    "No attractions found in the provided neighbourhood":"No attractions found in the provided neighbourhood"
 }
