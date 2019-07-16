@@ -30,13 +30,13 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
   // fetchEvents('Today').then(res => console.log(res));
-  const fetchedLocation = requestLocation('gjgjgjgjgjgjg');
+  const fetchedLocation = requestLocation('spanjaardshoek Ghent');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
     if (res[0] !== undefined) {
       const location = JSON.parse(res[0])[0];
       console.log(location);
-      if (!location.display_name.includes('Gent')) {
+      if (!location.display_name.includes('Ghent')) {
         console.log('Location not found in Ghent');
       } else {
         const latitude = parseFloat(location.lat);

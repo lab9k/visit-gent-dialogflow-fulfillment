@@ -5,7 +5,7 @@ const AttractionCard = require('../models/AttractionCard');
 
 
 function requestLocation(location, agent) {
-  const apiLocation = `${location.replace(/ /g, '+')}+Gent`;
+  const apiLocation = `${location.replace(/ /g, '+')}+Ghent`;
   return rp(`https://eu1.locationiq.com/v1/search.php?key=0a580bdfff78da&q=${apiLocation}&format=json`)
     .catch((e) => {
       console.log(e.message);
@@ -19,12 +19,13 @@ module.exports = {
     agent.add('Looking for attractions');
     const fetchedLocation = requestLocation(agent.parameters.address, agent);
     const fetchedAttractions = fetchAttractions(agent.context.get('botattractionssubject-followup').parameters.subject);
+    console.log(agent.context.get('botattractionssubject-followup').parameters.subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
 
     return fetched.then((res) => {
       if (res[0] !== undefined) {
         const location = JSON.parse(res[0])[0];
-        if (!location.display_name.includes('Gent')) {
+        if (!location.display_name.includes('Ghent')) {
           agent.add('Location not found in Ghent');
         } else {
           const latitude = parseFloat(location.lat);
