@@ -53,17 +53,17 @@ const QueryType = {
   SELECT
     ?attraction
     ?name
-    ?description
+    (SAMPLE(?desc) as ?description)
     ?contactPoint
     ?geometry 
     ?asWKT
     ?nameSubject
-    (SAMPLE(IRI(?url)) as ?page)
+    ?url
     (GROUP_CONCAT(?image; SEPARATOR=", ") AS ?imagesList)
   WHERE {
     ?attraction a <http://schema.org/TouristAttraction> .
     ?attraction n3:name ?name .
-    ?attraction n3:description ?description .
+    ?attraction n3:description ?desc .
     ?attraction n3:url ?url .
     ?attraction n3:image ?image .
     ?attraction schema:contactPoint ?contactPoint .
@@ -71,11 +71,12 @@ const QueryType = {
     ?geometry geosparql:asWKT ?asWKT .
     ?attraction dcterm:subject ?subject .
     ?subject n3:name ?nameSubject .
-    FILTER (langMatches(lang(?name), lang(?description))) .
+    FILTER (langMatches(lang(?name), lang(?desc))) .
     FILTER (langMatches(lang(?name), "{% lang %}")) .
     FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
-  FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
-  } GROUP BY ?attraction ?name ?description ?nameSubject ?contactPoint ?geometry ?asWKT`,
+    FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
+    FILTER(CONTAINS(?url, "/en/")).
+  } GROUP BY ?attraction ?name ?nameSubject ?contactPoint ?geometry ?asWKT ?url`,
 };
 
 module.exports = { QueryType };

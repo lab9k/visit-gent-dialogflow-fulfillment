@@ -32,8 +32,10 @@ function requestLocation(location) {
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
-
   fetchEvents('2019-07-18T12:00:00+02:00').then(res => console.log(res));
+  // fetchEvents(JSON.parse('{ "endDate": "2019-07-20T23:59:59+02:00", "startDate": "2019-07-14T00:00:00+02:00" }')).then(res => console.log(res));
+  // fetchEvents({ endDate: '2019-07-20T23:59:59+02:00', startDate: '2019-07-14T00:00:00+02:00' }).then(res => console.log(res));
+/*
   const fetchedLocation = requestLocation('Ghent');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
@@ -62,5 +64,5 @@ app.listen(port, () => {
         console.log(counter);
       }
     }
-  });
+  }); */
 });

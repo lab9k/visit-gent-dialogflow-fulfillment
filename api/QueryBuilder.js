@@ -22,23 +22,13 @@ module.exports = {
       .replace(/{% subject %}/g, subject);
   },
   buildEventQuery(time) {
-    const startDate = time;
-    const endDate = time;
-    /*
-    switch (time) {
-      case 'tomorrow':
-        addDays(startDate, 1);
-        addDays(endDate, 1);
-        break;
-      case 'in 2 days':
-        addDays(startDate, 2);
-        addDays(endDate, 2);
-        break;
-      default:
-        break;
-    } */
+    let startDate = formatDate(time.startDate);
+    let endDate = formatDate(time.endDate);
+    if (startDate === undefined || endDate === undefined) {
+      startDate = new Date();
+      endDate = new Date();
+    }
 
-    console.log(formatDate(startDate));
     const query = QueryType.event;
     return query
       .replace(/{% startDate %}/g, formatDate(startDate))
