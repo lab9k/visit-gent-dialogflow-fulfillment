@@ -66,16 +66,21 @@ const QueryType = {
     ?attraction n3:description ?desc .
     ?attraction n3:url ?url .
     ?attraction n3:image ?image .
-    ?attraction schema:contactPoint ?contactPoint .
-    ?contactPoint schema:geometry ?geometry .
-    ?geometry geosparql:asWKT ?asWKT .
-    ?attraction dcterm:subject ?subject .
-    ?subject n3:name ?nameSubject .
     FILTER (langMatches(lang(?n), lang(?desc))) .
     FILTER (langMatches(lang(?n), "{% lang %}")) .
     FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
     FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
     FILTER(CONTAINS(?url, "/en/")).
+ 	{
+    	SELECT ?contactPoint ?geometry ?attraction ?subject ?nameSubject
+    	WHERE {
+      	?attraction schema:contactPoint ?contactPoint .
+        ?contactPoint schema:geometry ?geometry .
+    	?geometry geosparql:asWKT ?asWKT .
+    	?attraction dcterm:subject ?subject .
+    	?subject n3:name ?nameSubject .
+  		} GROUP BY ?contactPoint ?geometry ?attraction ?subject ?nameSubject
+  	}
   } GROUP BY ?attraction ?nameSubject ?contactPoint ?geometry ?asWKT ?url`,
 };
 
