@@ -72,7 +72,7 @@ const QueryType = {
     FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
     FILTER(CONTAINS(?url, "/en/")).
   {
-    SELECT ?contactPoint ?geometry ?attraction ?subject ?nameSubject
+    SELECT ?contactPoint ?geometry ?attraction ?subject ?nameSubject ?asWKT
       WHERE {
         ?attraction schema:contactPoint ?contactPoint .
         ?contactPoint schema:geometry ?geometry .
