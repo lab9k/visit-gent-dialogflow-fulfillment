@@ -36,7 +36,7 @@ app.listen(port, () => {
   // fetchEvents(JSON.parse('{ "endDate": "2019-07-20T23:59:59+02:00", "startDate": "2019-07-14T00:00:00+02:00" }')).then(res => console.log(res));
   // fetchEvents({ endDate: '2019-07-20T23:59:59+02:00', startDate: '2019-07-14T00:00:00+02:00' }).then(res => console.log(res));
 
-  const fetchedLocation = requestLocation('Ghent');
+  const fetchedLocation = requestLocation('graslei');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
     if (res[0] !== undefined) {
@@ -49,7 +49,7 @@ app.listen(port, () => {
         const attractions = res[1];
         let i;
         let counter = 0;
-        const radius = 0.001;
+        const radius = 0.002;
         for (i = 0; i < attractions.length; i += 1) {
           const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
           if ((parseFloat(loc[0]) < (longitude + radius)
