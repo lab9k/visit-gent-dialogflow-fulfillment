@@ -71,16 +71,16 @@ const QueryType = {
     FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
     FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
     FILTER(CONTAINS(?url, "/en/")).
- 	{
-    	SELECT ?contactPoint ?geometry ?attraction ?subject ?nameSubject
-    	WHERE {
-      	?attraction schema:contactPoint ?contactPoint .
+  {
+    SELECT ?contactPoint ?geometry ?attraction ?subject ?nameSubject
+      WHERE {
+        ?attraction schema:contactPoint ?contactPoint .
         ?contactPoint schema:geometry ?geometry .
-    	?geometry geosparql:asWKT ?asWKT .
-    	?attraction dcterm:subject ?subject .
-    	?subject n3:name ?nameSubject .
-  		} GROUP BY ?contactPoint ?geometry ?attraction ?subject ?nameSubject
-  	}
+        ?geometry geosparql:asWKT ?asWKT .
+        ?attraction dcterm:subject ?subject .
+        ?subject n3:name ?nameSubject .
+      } GROUP BY ?contactPoint ?geometry ?attraction ?subject ?nameSubject
+    }
   } GROUP BY ?attraction ?nameSubject ?contactPoint ?geometry ?asWKT ?url`,
 };
 
