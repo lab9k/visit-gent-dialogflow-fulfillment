@@ -50,7 +50,7 @@ app.listen(port, () => {
         let i;
         let counter = 0;
         const radius = 0.002;
-        for (i = 0; i < attractions.length; i += 1) {
+        for (i = 0; (i < attractions.length && counter < 10); i += 1) {
           const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
           if ((parseFloat(loc[0]) < (longitude + radius)
       && parseFloat(loc[0]) > (longitude - radius))
