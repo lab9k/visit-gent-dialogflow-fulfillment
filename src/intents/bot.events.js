@@ -34,10 +34,7 @@ module.exports = {
             agent.add(card);
           }
         }
-      }).catch((err) => {
-        console.log(err.message);
-        agent.add('Something went wrong. Please try again later.');
-      });
+      }).catch(agent.add('Something went wrong. Please try again later.'));
     }
   },
 };
