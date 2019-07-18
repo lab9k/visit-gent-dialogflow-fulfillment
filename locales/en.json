@@ -3,8 +3,8 @@
     "Hello": "Hello",
     "Looking for events": "Looking for events",
     "Top 3 events": "Top 3 events",
-    "Looking for attractions": "Looking for attractions",
-    "Top 3 attractions" : "Top 3 attractions",
+    "Looking for attractions": "Looking for tourist attraction",
+    "Top 3 attractions" : "Top 3 tourist attraction",
     "From":"From",
     "To":"To",
     "Go to website":"Go to website",
@@ -12,7 +12,7 @@
     "Food and drinks":"Food and drinks",
     "Things to see/do":"Things to see/do",
     "Event":"Event",
-    "Attraction":"Attraction",
+    "Attraction":"Tourist attraction",
     "What kind of activity would you like to do":"What kind of activity would you like to do",
     "stay":"places to stay",
     "eat_drink":"places to eat or drink something",
@@ -21,10 +21,10 @@
     "today":"today",
     "tomorrow":"tommorow",
     "in 2 days":"in 2 days",
-    "No attractions found":"No attractions found",
+    "No attractions found":"No tourist attractions found",
     "No events found":"No events found",
     "Events":"Events",
     "Location not found":"Location not found",
     "Location not found in Ghent":"Location not found in Ghent",
-    "No attractions found in the provided neighbourhood":"No attractions found in the provided neighbourhood"
+    "No attractions found in the provided neighbourhood":"No tourist attractions found in the provided neighbourhood"
 }

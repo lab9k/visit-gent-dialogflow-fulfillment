@@ -50,6 +50,6 @@ module.exports = {
           }
         }
       }
-    }).catch(agent.add('Something went wrong. Please try again later.'));
+    });
   },
 };
