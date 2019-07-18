@@ -21,7 +21,7 @@ module.exports = {
       agent.add(i18n.__('Looking for events'));
       const fetched = fetchEvents(time);
       return fetched.then((res) => {
-        console.log('Fetched');
+        console.log(time);
         // return top 3 events
         if (res.length < 1) {
           agent.add(i18n.__('No events found'));
