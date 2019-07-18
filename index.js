@@ -35,7 +35,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 
-  const fetched = fetchEvents('2019-07-18T12:00:00+02:00');
+  /* const fetched = fetchEvents('2019-07-18T12:00:00+02:00');
   return fetched.then((res) => {
     let i;
     let card;
@@ -43,7 +43,7 @@ app.listen(port, () => {
       card = new EventCard(res[i]);
       console.log(card);
     }
-  });
+  }); */
 
   /* const fetchedLocation = requestLocation('graslei');
   const fetchedAttractions = fetchAttractions('Cafés');
