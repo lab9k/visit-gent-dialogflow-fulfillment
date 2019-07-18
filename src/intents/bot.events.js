@@ -10,7 +10,7 @@ module.exports = {
     console.log(agent.context.get('time'));
     if (agent.context.get('time').parameters.time === '' && agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
-      return undefined;
+      return '';
     }
     let time;
     if (agent.context.get('time').parameters.time !== '') {
@@ -24,6 +24,7 @@ module.exports = {
     console.log(time);
     const fetched = fetchEvents(time);
     return fetched.then((res) => {
+      console.log('Fetched');
       // return top 3 events
       if (res.length < 1) {
         agent.add(i18n.__('No events found'));
