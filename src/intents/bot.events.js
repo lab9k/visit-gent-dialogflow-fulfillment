@@ -14,9 +14,9 @@ module.exports = {
     } else {
       let time;
       if (agent.context.get('time').parameters.time !== '') {
-        ({ time } = agent.context.get('time').parameters);
-      } else {
         time = agent.parameters.eventTime;
+      } else {
+        ({ time } = agent.context.get('time').parameters);
       }
       agent.add(i18n.__('Looking for events'));
       const fetched = fetchEvents(time);
