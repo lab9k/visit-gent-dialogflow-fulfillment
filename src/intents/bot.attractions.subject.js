@@ -15,7 +15,8 @@ module.exports = {
       if (res.length < 1) {
         agent.add(i18n.__('No attractions found'));
       } else {
-        agent.add(`Looking for ${agent.parameters.subject}`);
+        agent.add(`Looking for ${agent.context
+          .get('botattractionssubject-followup').parameters.subject}`);
         for (i = 0; i < res.length; i += 1) {
           card = new AttractionCard(res[i]);
           agent.add(card);
