@@ -9,7 +9,7 @@ module.exports = {
   handler(agent) {
     agent.add(i18n.__('Looking for events'));
     console.log(agent.context.get('time'));
-    if (agent.context.get('time').parameters.time === '') {
+    if (agent.context.get('time').parameters.time === '' || agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
       return null;
     }
@@ -19,7 +19,7 @@ module.exports = {
       time = agent.context.get('time').parameters;
     } else {
       console.log('Time of parameters');
-      time = agent.parameters;
+      time = agent.parameters.eventTime;
     }
     const fetched = fetchEvents(time);
     return fetched.then((res) => {
