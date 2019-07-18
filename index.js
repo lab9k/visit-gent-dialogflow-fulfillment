@@ -45,6 +45,13 @@ app.listen(port, () => {
     }
   }); */
 
+  const agent = undefined;
+
+  if ((agent === undefined || agent.context.get('time').parameters.time === '')) {
+    console.log('ok');
+  }
+
+
   const fetchedLocation = requestLocation('graslei');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
