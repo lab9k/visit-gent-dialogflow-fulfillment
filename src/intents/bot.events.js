@@ -10,7 +10,7 @@ module.exports = {
     console.log(agent.context.get('time'));
     if (agent.context.get('time').parameters.time === '' && agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
-      return '';
+      return new Promise();
     }
     let time;
     if (agent.context.get('time').parameters.time !== '') {
