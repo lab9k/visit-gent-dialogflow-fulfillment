@@ -7,7 +7,7 @@ const EventCard = require('../models/EventCard');
 module.exports = {
   key: 'bot.events',
   handler(agent) {
-    const fetched = fetchEvents(time);
+    const fetched = fetchEvents('2019-07-18T12:00:00+02:00');
     return fetched.then((res) => {
       console.log('Fetched');
       // return top 3 events
