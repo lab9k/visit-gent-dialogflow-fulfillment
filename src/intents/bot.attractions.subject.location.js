@@ -18,12 +18,12 @@ function requestLocation(location, agent) {
 module.exports = {
   key: 'bot.attractions.subject.location',
   handler(agent) {
+    agent.add(i18n.__(`Looking for ${agent.context.get('botattractionssubject-followup').parameters.subject}`));
     const fetchedLocation = requestLocation(agent.parameters.address, agent);
     const fetchedAttractions = fetchAttractions(agent.context.get('botattractionssubject-followup').parameters.subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
 
     return fetched.then((res) => {
-      agent.add(i18n.__(`${agent.context.get('botattractionssubject-followup').parameters.subject}`));
       if (res[0] !== undefined) {
         const location = JSON.parse(res[0])[0];
         if (!location.display_name.includes('Ghent')) {
