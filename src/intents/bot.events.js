@@ -13,11 +13,12 @@ module.exports = {
       agent.add('What day are you looking for events?');
       return null;
     }
-    agent.add(agent.parameters.time);
     let time;
     if (agent.context.get('time').parameters.time !== '') {
+      console.log('Time of context');
       time = agent.context.get('time').parameters;
     } else {
+      console.log('Time of parameters');
       time = agent.parameters;
     }
     const fetched = fetchEvents(time);
