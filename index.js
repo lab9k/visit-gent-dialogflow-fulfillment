@@ -45,7 +45,7 @@ app.listen(port, () => {
     }
   }); */
 
-  /* const fetchedLocation = requestLocation('graslei');
+  const fetchedLocation = requestLocation('graslei');
   const fetchedAttractions = fetchAttractions('Cafés');
   Promise.all([fetchedLocation, fetchedAttractions]).then((res) => {
     if (res[0] !== undefined) {
@@ -65,7 +65,7 @@ app.listen(port, () => {
       && parseFloat(loc[0]) > (longitude - radius))
       && (parseFloat(loc[1]) < (latitude + radius)
       && parseFloat(loc[1]) > (latitude - radius))) {
-            // console.log(attractions[i].name);
+            console.log(attractions[i].name);
             // counter += 1;
             // console.log(new AttractionCard(attractions[i]));
           }
@@ -73,5 +73,5 @@ app.listen(port, () => {
         console.log(counter);
       }
     }
-  }); */
+  });
 });
