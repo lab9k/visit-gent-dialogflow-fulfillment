@@ -2,6 +2,7 @@
 const i18n = require('i18n');
 const { fetchEvents } = require('../../api/SparqlApi');
 const EventCard = require('../models/EventCard');
+const activities = require('./bot.activities');
 
 module.exports = {
   key: 'bot.events',
@@ -10,8 +11,15 @@ module.exports = {
     const fetched = fetchEvents(agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
+      if (agent.context.get('time').parameters.time === '') {
+        agent.add('What day are you looking for events?');
+      }
 
-      if (res.length < 1) {
+      const intentMap = new Map();
+      intentMap.set('bot.activities', activities);
+      agent.handleRequest(intentMap);
+
+      /* if (res.length < 1) {
         agent.add(i18n.__('No events found'));
       } else {
         agent.add(`${i18n.__('Top 3 events')}: `);
@@ -21,7 +29,7 @@ module.exports = {
           card = new EventCard(res[i]);
           agent.add(card);
         }
-      }
+      } */
     });
   },
 };
