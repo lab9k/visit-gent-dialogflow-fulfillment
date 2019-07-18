@@ -11,7 +11,7 @@ module.exports = {
     const fetched = fetchEvents(agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
-      if (agent.context.get('time').parameters.time === '') {
+      if (agent.context.get('time').parameters['date-time'] === '') {
         agent.add('What day are you looking for events?');
       }
 
