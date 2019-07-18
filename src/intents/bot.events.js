@@ -7,7 +7,6 @@ const EventCard = require('../models/EventCard');
 module.exports = {
   key: 'bot.events',
   handler(agent) {
-    agent.add(i18n.__('Looking for events'));
     console.log(agent.context.get('time'));
     if (agent.context.get('time').parameters.time === '' && agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
@@ -21,6 +20,8 @@ module.exports = {
       console.log('Time of parameters');
       time = agent.parameters.eventTime;
     }
+    agent.add(i18n.__('Looking for events'));
+    console.log(time);
     const fetched = fetchEvents(time);
     return fetched.then((res) => {
       // return top 3 events
