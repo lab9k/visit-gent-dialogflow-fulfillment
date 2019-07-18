@@ -3,17 +3,18 @@
 const i18n = require('i18n');
 const { fetchEvents } = require('../../api/SparqlApi');
 const EventCard = require('../models/EventCard');
-// const activities = require('./bot.activities');
 
 module.exports = {
   key: 'bot.events',
   handler(agent) {
+    console.log(agent.context.get('time'));
+    console.log(agent.parameters.eventTime);
+
     if ((agent.context.get('time') === undefined || agent.context.get('time').parameters.time === '') && agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
-      // return null;
     } else {
       let time;
-      if (agent.context.get('time').parameters.time !== '') {
+      if (agent.parameters.eventTime !== '') {
         time = agent.parameters.eventTime;
       } else {
         ({ time } = agent.context.get('time').parameters);
