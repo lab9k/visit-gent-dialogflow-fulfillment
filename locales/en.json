@@ -26,5 +26,6 @@
     "Events":"Events",
     "Location not found":"Location not found",
     "Location not found in Ghent":"Location not found in Ghent",
-    "No attractions found in the provided neighbourhood":"No tourist attractions found in the provided neighbourhood"
+    "No attractions found in the provided neighbourhood":"No tourist attractions found in the provided neighbourhood",
+    "Attractions":"Tourist attractions"
 }
