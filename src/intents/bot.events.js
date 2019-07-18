@@ -11,15 +11,11 @@ module.exports = {
     console.log(agent.context.get('time'));
     if (agent.context.get('time').parameters['date-time'] === '') {
       agent.add('What day are you looking for events?');
+      return null;
     }
     const fetched = fetchEvents(agent.parameters.time);
     return fetched.then((res) => {
       // return top 3 events
-
-      /* const intentMap = new Map();
-      intentMap.set('bot.activities', activities);
-      agent.handleRequest(intentMap); */
-
       if (res.length < 1) {
         agent.add(i18n.__('No events found'));
       } else {
