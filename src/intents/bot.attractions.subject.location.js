@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-const requestPromise = require('request-promise');
+// const requestPromise = require('request-promise');
+const requestPromiseNative = require('request-promise-native');
 const i18n = require('i18n');
 const { fetchAttractions } = require('../../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
@@ -7,7 +8,7 @@ const AttractionCard = require('../models/AttractionCard');
 
 function requestLocation(location, agent) {
   const apiLocation = `${location.replace(/ /g, '+')}+Ghent`;
-  return requestPromise(`https://eu1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_API_KEY}&q=${apiLocation}&format=json`)
+  return requestPromiseNative(`https://eu1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_API_KEY}&q=${apiLocation}&format=json`)
     .catch((e) => {
       console.log(e.message);
       agent.add(i18n.__('Location not found'));
