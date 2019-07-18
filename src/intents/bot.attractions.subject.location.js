@@ -49,6 +49,9 @@ module.exports = {
           }
         }
       }
+    }).catch((err) => {
+      console.log(err.message);
+      agent.add('Something went wrong. Please try again later.');
     });
   },
 };

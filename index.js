@@ -73,5 +73,8 @@ app.listen(port, () => {
         console.log(counter);
       }
     }
+  }).catch((err) => {
+    console.log(err.message);
+    console.log('Something went wrong. Please try again later.');
   });
 });
