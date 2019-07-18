@@ -9,7 +9,7 @@ module.exports = {
   handler(agent) {
     agent.add(i18n.__('Looking for events'));
     console.log(agent.context.get('time'));
-    if (agent.context.get('time').parameters['date-time'] === '') {
+    if (agent.context.get('time') === undefined) {
       agent.add('What day are you looking for events?');
       return null;
     }
