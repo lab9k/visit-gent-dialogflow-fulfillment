@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(i18n.init);
 app.post('/api', fulfillment);
-app.get('/knowledge', knowledge);
+app.post('/knowledge', knowledge);
 dotenv.config();
 
 
