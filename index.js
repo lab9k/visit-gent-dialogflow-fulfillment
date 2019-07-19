@@ -1,14 +1,15 @@
 const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
-const requestPromise = require('request-promise');
 const dotenv = require('dotenv');
 const fulfillment = require('./src/fulfillment');
+const knowledge = require('./src/knowledge');
 
 
-const { fetchAttractions, fetchEvents } = require('./api/SparqlApi');
+/* const { fetchAttractions, fetchEvents } = require('./api/SparqlApi');
 const AttractionCard = require('./src/models/AttractionCard');
 const EventCard = require('./src/models/EventCard');
+const requestPromise = require('request-promise'); */
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(i18n.init);
 app.post('/api', fulfillment);
+app.post('/knowledge', knowledge);
 dotenv.config();
 
 
@@ -25,11 +27,11 @@ i18n.configure({
   defaultLocale: 'en',
 });
 
-function requestLocation(location) {
+/* function requestLocation(location) {
   const apiLocation = location.replace(/ /g, '+');
   return requestPromise(`https://eu1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_API_KEY}&q=${apiLocation}&format=json`)
     .catch(e => console.log(e.message));
-}
+} */
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
@@ -43,8 +45,7 @@ app.listen(port, () => {
       card = new EventCard(res[i]);
       console.log(card);
     }
-  }); */
-
+  });
 
   const fetchedLocation = requestLocation('graslei');
   const fetchedAttractions = fetchAttractions('Cafés');
@@ -74,5 +75,5 @@ app.listen(port, () => {
         console.log(counter);
       }
     }
-  });
+  }); */
 });
