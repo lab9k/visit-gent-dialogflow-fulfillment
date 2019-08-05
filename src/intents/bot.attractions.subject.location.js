@@ -2,7 +2,7 @@
 // const requestPromise = require('request-promise');
 const requestPromiseNative = require('request-promise-native');
 const i18n = require('i18n');
-const { fetchAttractions } = require('../../api/SparqlApi');
+const { fetchAttractions } = require('../api/SparqlApi');
 const AttractionCard = require('../models/AttractionCard');
 
 
@@ -38,8 +38,8 @@ module.exports = {
           for (i = 0; i < attractions.length && counter < 10; i += 1) {
             const loc = attractions[i].asWKT.value.replace('POINT(', '').replace(')', '').split(' ');
             if ((parseFloat(loc[0]) < (longitude + radius)
-                && parseFloat(loc[0]) > (longitude - radius))
-                && (parseFloat(loc[1]) < (latitude + radius)
+              && parseFloat(loc[0]) > (longitude - radius))
+              && (parseFloat(loc[1]) < (latitude + radius)
                 && parseFloat(loc[1]) > (latitude - radius))) {
               counter += 1;
               agent.add(new AttractionCard(attractions[i]));
