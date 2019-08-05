@@ -10,9 +10,9 @@ function formatDate(date) {
   return dateFormat(date, 'yyyy-mm-dd');
 }
 
-function addDays(date, days) {
-  return date.setDate(date.getDate() + days);
-}
+// function addDays(date, days) {
+//   return date.setDate(date.getDate() + days);
+// }
 
 module.exports = {
   buildAttractionQuery(subject) {
