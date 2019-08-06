@@ -14,6 +14,7 @@ app.use(i18n.init);
 app.post('/api', fulfillment);
 app.post('/knowledge', knowledge);
 app.get('/webhook', webhook.get);
+app.post('/webhook', webhook.post);
 dotenv.config();
 
 
