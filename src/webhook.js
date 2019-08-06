@@ -77,12 +77,23 @@ module.exports = {
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0];
         const message = webhookEvent.message.text;
-        request.get(`https://graph.facebook.com/2873207046042391?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+        const recipientId = webhookEvent.recipient.id;
+        request.get(`https://graph.facebook.com/${recipientId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
           (error, response) => {
             console.log(JSON.parse(response.body).locale);
             LANGUAGE_CODE = JSON.parse(response.body).locale;
             const dialog = new DialogFlow('visit-gent-qghbjt');
             dialog.sendTextMessageToDialogFlow(message, '1');
+            request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+              {
+                messaging_type: 'RESPONSE',
+                recipient: {
+                  id: recipientId,
+                },
+                message: {
+                  text: 'hello, world!',
+                },
+              });
           });
       });
 
