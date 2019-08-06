@@ -3,6 +3,7 @@ const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const request = require('request');
 const fulfillment = require('./src/fulfillment');
 const knowledge = require('./src/knowledge');
 const webhook = require('./src/webhook');
@@ -24,7 +25,7 @@ i18n.configure({
   defaultLocale: 'en',
 });
 
-const LANGUAGE_CODE = 'fr';
+const LANGUAGE_CODE = 'nl_NL';
 
 class DialogFlow {
   constructor(projectId) {
@@ -68,9 +69,9 @@ class DialogFlow {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(process.env.DIALOGFLOW_PRIVATE_KEY);
-  console.log(process.env.DIALOGFLOW_CLIENT_EMAIL);
+  // console.log(process.env.DIALOGFLOW_PRIVATE_KEY);
+  // console.log(process.env.DIALOGFLOW_CLIENT_EMAIL);
   // detectIntent();
   const d = new DialogFlow('visit-gent-qghbjt');
-  d.sendTextMessageToDialogFlow('Bonjour', '1');
+  d.sendTextMessageToDialogFlow('Hallo', '1');
 });

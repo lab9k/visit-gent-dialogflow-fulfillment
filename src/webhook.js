@@ -1,6 +1,7 @@
-const LANGUAGE_CODE = 'fr';
+let LANGUAGE_CODE;
 
 const dialogflow = require('dialogflow');
+const request = require('request');
 
 class DialogFlow {
   constructor(projectId) {
@@ -78,6 +79,11 @@ module.exports = {
         const message = webhookEvent.message.text;
         console.log(entry);
         console.log(webhookEvent);
+        request.get(`https://graph.facebook.com/2873207046042391?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+          (error, response) => {
+            console.log(JSON.parse(response.body).locale);
+            LANGUAGE_CODE = JSON.parse(response.body).locale;
+          });
         const dialog = new DialogFlow('visit-gent-qghbjt');
         dialog.sendTextMessageToDialogFlow(message, '1');
       });
