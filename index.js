@@ -3,13 +3,13 @@ const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const fs = require('fs');
 const fulfillment = require('./src/fulfillment');
 const knowledge = require('./src/knowledge');
 
 
 async function detectIntent() {
-  const privateKey = (process.env.NODE_ENV === 'production') ? JSON.parse(process.env.DIALOGFLOW_PRIVATE_KEY) : process.env.DIALOGFLOW_PRIVATE_KEY;
+  // const privateKey = (process.env.NODE_ENV === 'production') ? JSON.parse(process.env.DIALOGFLOW_PRIVATE_KEY) : process.env.DIALOGFLOW_PRIVATE_KEY;
+  const privateKey = process.env.DIALOGFLOW_PRIVATE_KEY;
   const clientEmail = process.env.DIALOGFLOW_CLIENT_EMAIL;
   const config = {
     credentials: {
