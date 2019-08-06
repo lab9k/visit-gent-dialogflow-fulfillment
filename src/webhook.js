@@ -77,8 +77,8 @@ module.exports = {
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0];
         const message = webhookEvent.message.text;
-        const recipientId = webhookEvent.recipient.id;
-        request.get(`https://graph.facebook.com/${recipientId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+        const senderId = webhookEvent.sender.id;
+        request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
           (error, response) => {
             console.log(JSON.parse(response.body).locale);
             LANGUAGE_CODE = JSON.parse(response.body).locale;
@@ -88,7 +88,7 @@ module.exports = {
               {
                 messaging_type: 'RESPONSE',
                 recipient: {
-                  id: recipientId,
+                  id: senderId,
                 },
                 message: {
                   text: 'hello, world!',
