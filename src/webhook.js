@@ -37,7 +37,7 @@ class DialogFlow {
     };
     try {
       const responses = await this.sessionClient.detectIntent(req);
-      return responses[0].queryResult.fulfillmentText;
+      return responses[0].queryResult.fulfillmentMessages;
     } catch (err) {
       console.error('DialogFlow.sendTextMessageToDialogFlow ERROR:', err);
       throw err;
@@ -87,10 +87,11 @@ module.exports = {
           const senderId = webhookEvent.sender.id;
           request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
-              console.log(JSON.parse(response.body).locale);
               LANGUAGE_CODE = JSON.parse(response.body).locale;
               const dialog = new DialogFlow('visit-gent-qghbjt');
+              console.log(message);
               dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessages) => {
+                console.log(resultMessages);
                 request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                   .form({
                     messaging_type: 'RESPONSE',
