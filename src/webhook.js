@@ -77,8 +77,6 @@ module.exports = {
       body.entry.forEach((entry) => {
         // Gets the message. entry.messaging is an array, but
         // will only ever contain one message, so we get index 0
-        console.log(`ENTRY: ${entry}`);
-        console.log(`webhookEvent: ${entry.messaging[0]}`);
 
         const webhookEvent = entry.messaging[0];
         if (webhookEvent.message !== undefined) {
@@ -122,6 +120,7 @@ module.exports = {
                 };
                 resultMessages.forEach((e) => {
                   if (e.text !== undefined) {
+                    // Text
                     responseJSON = {
                       messaging_type: 'RESPONSE',
                       recipient: {
@@ -129,20 +128,30 @@ module.exports = {
                       },
                       message: {
                         text: e.text.text[0],
-                        quick_replies: [],
                       },
                     };
                     result.push(responseJSON);
-                    console.log(result);
                   } else if (e.quickReplies !== undefined) {
+                    // Quick Reply
+                    responseJSON = {
+                      messaging_type: 'RESPONSE',
+                      recipient: {
+                        id: senderId,
+                      },
+                      message: {
+                        quick_replies: [],
+                        text: e.quickReplies.title,
+                      },
+                    };
                     e.quickReplies.quickReplies.forEach((reply) => {
                       quickReply = {
                         content_type: 'text',
                         title: reply,
                         payload: '<POSTBACK_PAYLOAD>',
                       };
-                      result[result.length - 1].message.quick_replies.push(quickReply);
+                      responseJSON.message.quick_replies.push(quickReply);
                     });
+                    result.push(responseJSON);
                   } else if (e.card !== undefined) {
                     isCard = true;
                     responseJSON = {

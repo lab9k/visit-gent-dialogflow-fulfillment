@@ -30,7 +30,8 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   const dialog = new DialogFlow('visit-gent-qghbjt');
 
-  dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
+  dialog.sendTextMessageToDialogFlow('i am looking for a pub', '1').then((resultMessages) => {
+    console.log(JSON.stringify(resultMessages));
     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
       .form({
         messaging_type: 'RESPONSE',
@@ -42,7 +43,6 @@ app.listen(port, () => {
     let responseJSON;
     let isCard = false;
     let quickReply;
-    const result = [];
     const responseJSONCard = {
       messaging_type: 'RESPONSE',
       recipient: {
@@ -61,7 +61,28 @@ app.listen(port, () => {
     };
 
     resultMessages.forEach((e) => {
-      if (e.text !== undefined) {
+      if (e.quickReplies !== undefined) {
+        // Quick Reply
+        responseJSON = {
+          messaging_type: 'RESPONSE',
+          recipient: {
+            id: '2873207046042391',
+          },
+          message: {
+            quick_replies: [],
+            text: e.quickReplies.title,
+          },
+        };
+        e.quickReplies.quickReplies.forEach((reply) => {
+          quickReply = {
+            content_type: 'text',
+            title: reply,
+            payload: '<POSTBACK_PAYLOAD>',
+          };
+          responseJSON.message.quick_replies.push(quickReply);
+        });
+      } else if (e.text !== undefined) {
+        // Text
         responseJSON = {
           messaging_type: 'RESPONSE',
           recipient: {
@@ -69,20 +90,8 @@ app.listen(port, () => {
           },
           message: {
             text: e.text.text[0],
-            quick_replies: [],
           },
         };
-        result.push(responseJSON);
-        console.log(result);
-      } else if (e.quickReplies !== undefined) {
-        e.quickReplies.quickReplies.forEach((reply) => {
-          quickReply = {
-            content_type: 'text',
-            title: reply,
-            payload: '<POSTBACK_PAYLOAD>',
-          };
-          result[result.length - 1].message.quick_replies.push(quickReply);
-        });
       } else if (e.card !== undefined) {
         isCard = true;
         responseJSON = {
@@ -102,13 +111,9 @@ app.listen(port, () => {
             },
           ],
         };
-        responseJSONCard.message.attachment.payload.elements.push(responseJSON);
       }
-    });
-
-    result.forEach((res) => {
       request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-        .form(res);
+        .form(responseJSON);
     });
 
     if (isCard) {
