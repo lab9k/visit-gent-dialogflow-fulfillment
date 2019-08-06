@@ -3,11 +3,21 @@ const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const fs = require('fs');
 const fulfillment = require('./src/fulfillment');
 const knowledge = require('./src/knowledge');
 
+
 async function detectIntent() {
-  const client = new dialogflow.v2beta1.SessionsClient();
+  const privateKey = (process.env.NODE_ENV === 'production') ? JSON.parse(process.env.DIALOGFLOW_PRIVATE_KEY) : process.env.DIALOGFLOW_PRIVATE_KEY;
+  const clientEmail = process.env.DIALOGFLOW_CLIENT_EMAIL;
+  const config = {
+    credentials: {
+      private_key: privateKey,
+      client_email: clientEmail,
+    },
+  };
+  const client = new dialogflow.SessionsClient(config);
   const formattedSession = client.sessionPath('visit-gent-qghbjt', '5');
   const queryInput = {
     text: {
