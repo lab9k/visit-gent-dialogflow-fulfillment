@@ -28,7 +28,10 @@ class DialogFlow {
       queryInput: {
         text: {
           text: textMessage,
-          languageCode: LANGUAGE_CODE,
+          // TODO
+          // languageCode: LANGUAGE_CODE,
+          languageCode: 'en',
+
         },
       },
     };
