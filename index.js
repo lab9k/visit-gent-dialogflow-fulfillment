@@ -25,7 +25,7 @@ i18n.configure({
   defaultLocale: 'en',
 });
 
-const LANGUAGE_CODE = 'nl_NL';
+const LANGUAGE_CODE = '';
 
 class DialogFlow {
   constructor(projectId) {
@@ -72,6 +72,12 @@ app.listen(port, () => {
   // console.log(process.env.DIALOGFLOW_PRIVATE_KEY);
   // console.log(process.env.DIALOGFLOW_CLIENT_EMAIL);
   // detectIntent();
-  const d = new DialogFlow('visit-gent-qghbjt');
-  d.sendTextMessageToDialogFlow('Hallo', '1');
+  /* request.get(`https://graph.facebook.com/2873207046042391?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+    (error, response) => {
+      console.log(JSON.parse(response.body).locale);
+      LANGUAGE_CODE = JSON.parse(response.body).locale;
+      const d = new DialogFlow('visit-gent-qghbjt');
+      d.sendTextMessageToDialogFlow('Hallo', '1');
+    }); */
+  // console.log(LANGUAGE_CODE);
 });
