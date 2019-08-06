@@ -46,7 +46,7 @@ class DialogFlow {
     // Define session path
     const sessionPath = this.sessionClient.sessionPath(this.projectId, sessionId);
     // The text query request.
-    const request = {
+    const req = {
       session: sessionPath,
       queryInput: {
         text: {
@@ -56,7 +56,7 @@ class DialogFlow {
       },
     };
     try {
-      const responses = await this.sessionClient.detectIntent(request);
+      const responses = await this.sessionClient.detectIntent(req);
       console.log('DialogFlow.sendTextMessageToDialogFlow: Detected intent');
       console.log(responses[0].queryResult.fulfillmentText);
       return responses;
