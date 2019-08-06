@@ -80,16 +80,4 @@ app.listen(port, () => {
       d.sendTextMessageToDialogFlow('Hallo', '1');
     }); */
   // console.log(LANGUAGE_CODE);
-  request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-    .form(
-      {
-        messaging_type: 'RESPONSE',
-        recipient: {
-          id: '2873207046042391',
-        },
-        message: {
-          text: 'hello, world!',
-        },
-      },
-    );
 });

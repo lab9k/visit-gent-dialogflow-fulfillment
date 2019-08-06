@@ -73,9 +73,12 @@ module.exports = {
       body.entry.forEach((entry) => {
         // Gets the message. entry.messaging is an array, but
         // will only ever contain one message, so we get index 0
+        console.log(`ENTRY: ${entry}`);
+        console.log(`webhookEvent: ${entry.messaging[0]}`);
+
         const webhookEvent = entry.messaging[0];
         const message = webhookEvent.message.text;
-        console.log(entry);
+
         const senderId = webhookEvent.sender.id;
         request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
           (error, response) => {
