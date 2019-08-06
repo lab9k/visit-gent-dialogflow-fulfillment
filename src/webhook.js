@@ -1,3 +1,47 @@
+const LANGUAGE_CODE = 'fr';
+
+const dialogflow = require('dialogflow');
+
+class DialogFlow {
+  constructor(projectId) {
+    this.projectId = projectId;
+    const privateKey = (process.env.NODE_ENV === 'production') ? JSON.parse(process.env.DIALOGFLOW_PRIVATE_KEY) : process.env.DIALOGFLOW_PRIVATE_KEY;
+    const clientEmail = process.env.DIALOGFLOW_CLIENT_EMAIL;
+    const config = {
+      credentials: {
+        private_key: privateKey,
+        client_email: clientEmail,
+      },
+    };
+
+    this.sessionClient = new dialogflow.SessionsClient(config);
+  }
+
+  async sendTextMessageToDialogFlow(textMessage, sessionId) {
+    // Define session path
+    const sessionPath = this.sessionClient.sessionPath(this.projectId, sessionId);
+    // The text query request.
+    const request = {
+      session: sessionPath,
+      queryInput: {
+        text: {
+          text: textMessage,
+          languageCode: LANGUAGE_CODE,
+        },
+      },
+    };
+    try {
+      const responses = await this.sessionClient.detectIntent(request);
+      console.log('DialogFlow.sendTextMessageToDialogFlow: Detected intent');
+      console.log(responses[0].queryResult.fulfillmentText);
+      return responses;
+    } catch (err) {
+      console.error('DialogFlow.sendTextMessageToDialogFlow ERROR:', err);
+      throw err;
+    }
+  }
+}
+
 module.exports = {
   get(req, res) {
     // Your verify token. Should be a random string.
@@ -31,7 +75,10 @@ module.exports = {
         // Gets the message. entry.messaging is an array, but
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0];
+        const message = webhookEvent.message.text;
         console.log(webhookEvent);
+        const dialog = new DialogFlow('visit-gent-qghbjt');
+        dialog.sendTextMessageToDialogFlow(message, '1');
       });
 
       // Returns a '200 OK' response to all requests
