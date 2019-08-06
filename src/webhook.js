@@ -33,9 +33,7 @@ class DialogFlow {
     };
     try {
       const responses = await this.sessionClient.detectIntent(req);
-      console.log('DialogFlow.sendTextMessageToDialogFlow: Detected intent');
-      console.log(responses[0].queryResult.fulfillmentText);
-      return responses;
+      return responses[0].queryResult.fulfillmentText;
     } catch (err) {
       console.error('DialogFlow.sendTextMessageToDialogFlow ERROR:', err);
       throw err;
@@ -83,17 +81,20 @@ module.exports = {
             console.log(JSON.parse(response.body).locale);
             LANGUAGE_CODE = JSON.parse(response.body).locale;
             const dialog = new DialogFlow('visit-gent-qghbjt');
-            dialog.sendTextMessageToDialogFlow(message, '1');
-            request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
-              {
-                messaging_type: 'RESPONSE',
-                recipient: {
-                  id: senderId,
-                },
-                message: {
-                  text: 'hello, world!',
-                },
-              });
+            dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessage) => {
+              request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                .form(
+                  {
+                    messaging_type: 'RESPONSE',
+                    recipient: {
+                      id: senderId,
+                    },
+                    message: {
+                      text: resultMessage,
+                    },
+                  },
+                );
+            });
           });
       });
 
