@@ -76,6 +76,7 @@ module.exports = {
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0];
         const message = webhookEvent.message.text;
+        console.log(entry);
         console.log(webhookEvent);
         const dialog = new DialogFlow('visit-gent-qghbjt');
         dialog.sendTextMessageToDialogFlow(message, '1');
