@@ -8,6 +8,7 @@ const fulfillment = require('./src/fulfillment');
 const knowledge = require('./src/knowledge');
 const webhook = require('./src/webhook');
 
+
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,12 +21,102 @@ dotenv.config();
 
 
 i18n.configure({
-  locales: ['en', 'nl'],
+  locales: ['en', 'nl', 'fr'],
   directory: `${__dirname}/locales`,
   defaultLocale: 'en',
 });
 
-const LANGUAGE_CODE = '';
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  const dialog = new DialogFlow('visit-gent-qghbjt');
+
+  dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
+    request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+      .form({
+        messaging_type: 'RESPONSE',
+        recipient: {
+          id: '2873207046042391',
+        },
+        sender_action: 'typing_on',
+      });
+    let responseJSON;
+    let isCard = false;
+    let quickReply;
+    const result = [];
+    const responseJSONCard = {
+      messaging_type: 'RESPONSE',
+      recipient: {
+        id: '2873207046042391',
+      },
+      message: {
+        attachment: {
+          type: 'template',
+          payload: {
+            template_type: 'generic',
+            elements: [
+            ],
+          },
+        },
+      },
+    };
+
+    resultMessages.forEach((e) => {
+      if (e.text !== undefined) {
+        responseJSON = {
+          messaging_type: 'RESPONSE',
+          recipient: {
+            id: '2873207046042391',
+          },
+          message: {
+            text: e.text.text[0],
+            quick_replies: [],
+          },
+        };
+        result.push(responseJSON);
+        console.log(result);
+      } else if (e.quickReplies !== undefined) {
+        e.quickReplies.quickReplies.forEach((reply) => {
+          quickReply = {
+            content_type: 'text',
+            title: reply,
+            payload: '<POSTBACK_PAYLOAD>',
+          };
+          result[result.length - 1].message.quick_replies.push(quickReply);
+        });
+      } else if (e.card !== undefined) {
+        isCard = true;
+        responseJSON = {
+          title: e.card.title,
+          image_url: e.card.imageUri,
+          subtitle: e.card.subtitle,
+          default_action: {
+            type: 'web_url',
+            url: e.card.buttons[0].postback,
+            webview_height_ratio: 'tall',
+          },
+          buttons: [
+            {
+              type: 'web_url',
+              url: e.card.buttons[0].postback,
+              title: 'View Website',
+            },
+          ],
+        };
+        responseJSONCard.message.attachment.payload.elements.push(responseJSON);
+      }
+    });
+
+    result.forEach((res) => {
+      request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+        .form(res);
+    });
+
+    if (isCard) {
+      request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+        .form(responseJSONCard);
+    }
+  });
+});
 
 class DialogFlow {
   constructor(projectId) {
@@ -51,33 +142,16 @@ class DialogFlow {
       queryInput: {
         text: {
           text: textMessage,
-          languageCode: LANGUAGE_CODE,
+          languageCode: 'en',
         },
       },
     };
     try {
       const responses = await this.sessionClient.detectIntent(req);
-      console.log('DialogFlow.sendTextMessageToDialogFlow: Detected intent');
-      console.log(responses[0].queryResult.fulfillmentText);
-      return responses;
+      return responses[0].queryResult.fulfillmentMessages;
     } catch (err) {
       console.error('DialogFlow.sendTextMessageToDialogFlow ERROR:', err);
       throw err;
     }
   }
 }
-
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  // console.log(process.env.DIALOGFLOW_PRIVATE_KEY);
-  // console.log(process.env.DIALOGFLOW_CLIENT_EMAIL);
-  // detectIntent();
-  /* request.get(`https://graph.facebook.com/2873207046042391?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
-    (error, response) => {
-      console.log(JSON.parse(response.body).locale);
-      LANGUAGE_CODE = JSON.parse(response.body).locale;
-      const d = new DialogFlow('visit-gent-qghbjt');
-      d.sendTextMessageToDialogFlow('Hallo', '1');
-    }); */
-  // console.log(LANGUAGE_CODE);
-});

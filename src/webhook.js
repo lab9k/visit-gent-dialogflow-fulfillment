@@ -1,7 +1,8 @@
-let LANGUAGE_CODE;
-
 const dialogflow = require('dialogflow');
 const request = require('request');
+
+let LANGUAGE_CODE;
+
 
 class DialogFlow {
   constructor(projectId) {
@@ -77,29 +78,114 @@ module.exports = {
         console.log(`webhookEvent: ${entry.messaging[0]}`);
 
         const webhookEvent = entry.messaging[0];
-        const message = webhookEvent.message.text;
+        if (webhookEvent.message !== undefined) {
+          const message = webhookEvent.message.text;
 
-        const senderId = webhookEvent.sender.id;
-        request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
-          (error, response) => {
-            console.log(JSON.parse(response.body).locale);
-            LANGUAGE_CODE = JSON.parse(response.body).locale;
-            const dialog = new DialogFlow('visit-gent-qghbjt');
-            dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessage) => {
-              request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                .form(
-                  {
+          const senderId = webhookEvent.sender.id;
+          request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+            (error, response) => {
+              console.log(JSON.parse(response.body).locale);
+              LANGUAGE_CODE = JSON.parse(response.body).locale;
+              const dialog = new DialogFlow('visit-gent-qghbjt');
+              dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessages) => {
+                request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                  .form({
                     messaging_type: 'RESPONSE',
                     recipient: {
                       id: senderId,
                     },
-                    message: {
-                      text: resultMessage,
+                    sender_action: 'typing_on',
+                  });
+                let responseJSON;
+                let isCard = false;
+                let quickReply;
+                const result = [];
+                const responseJSONCard = {
+                  messaging_type: 'RESPONSE',
+                  recipient: {
+                    id: senderId,
+                  },
+                  message: {
+                    attachment: {
+                      type: 'template',
+                      payload: {
+                        template_type: 'generic',
+                        elements: [
+                        ],
+                      },
                     },
                   },
-                );
+                };
+                resultMessages.forEach((e) => {
+                  if (e.text !== undefined) {
+                    responseJSON = {
+                      messaging_type: 'RESPONSE',
+                      recipient: {
+                        id: senderId,
+                      },
+                      message: {
+                        text: e.text.text[0],
+                        quick_replies: [],
+                      },
+                    };
+                    result.push(responseJSON);
+                    console.log(result);
+                  } else if (e.quickReplies !== undefined) {
+                    e.quickReplies.quickReplies.forEach((reply) => {
+                      quickReply = {
+                        content_type: 'text',
+                        title: reply,
+                        payload: '<POSTBACK_PAYLOAD>',
+                      };
+                      result[result.length - 1].message.quick_replies.push(quickReply);
+                    });
+                  } else if (e.card !== undefined) {
+                    isCard = true;
+                    responseJSON = {
+                      title: e.card.title,
+                      image_url: e.card.imageUri,
+                      subtitle: e.card.subtitle,
+                      default_action: {
+                        type: 'web_url',
+                        url: e.card.buttons[0].postback,
+                        webview_height_ratio: 'tall',
+                      },
+                      buttons: [
+                        {
+                          type: 'web_url',
+                          url: e.card.buttons[0].postback,
+                          title: 'View Website',
+                        },
+                      ],
+                    };
+                    responseJSONCard.message.attachment.payload.elements.push(responseJSON);
+                  }
+                });
+
+                result.forEach((resArray) => {
+                  request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                    .form(resArray);
+                });
+
+                if (isCard) {
+                  request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                    .form(responseJSONCard);
+                }
+                /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                  .form(
+                    {
+                      messaging_type: 'RESPONSE',
+                      recipient: {
+                        id: senderId,
+                      },
+                      message: {
+                        text: resultMessage,
+                      },
+                    },
+                  ); */
+              });
             });
-          });
+        }
       });
 
       // Returns a '200 OK' response to all requests
