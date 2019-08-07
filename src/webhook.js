@@ -93,10 +93,11 @@ module.exports = {
                 let isCard = false;
                 let isQuickReply = false;
                 let quickReply;
+                const textResponses = [];
                 const responseJSONCard = {
                   messaging_type: 'RESPONSE',
                   recipient: {
-                    id: senderId,
+                    id: '2873207046042391',
                   },
                   message: {
                     attachment: {
@@ -111,13 +112,13 @@ module.exports = {
                 };
 
                 resultMessages.forEach((e) => {
-                  if (e.quickReplies !== undefined) {
+                  if (e.message === 'quickReplies') {
                     isQuickReply = true;
                     // Quick Reply
                     responseJSON = {
                       messaging_type: 'RESPONSE',
                       recipient: {
-                        id: senderId,
+                        id: '2873207046042391',
                       },
                       message: {
                         quick_replies: [],
@@ -134,18 +135,19 @@ module.exports = {
                     });
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                       .form(responseJSON);
-                  } else if (e.text !== undefined) {
+                  } else if (e.message === 'text') {
                     // Text
                     responseJSON = {
                       messaging_type: 'RESPONSE',
                       recipient: {
-                        id: senderId,
+                        id: '2873207046042391',
                       },
                       message: {
                         text: e.text.text[0],
                       },
                     };
-                  } else if (e.card !== undefined) {
+                    textResponses.push(responseJSON);
+                  } else if (e.message === 'card') {
                     isCard = true;
                     responseJSON = {
                       title: e.card.title,
@@ -169,8 +171,10 @@ module.exports = {
                 });
 
                 if (!isQuickReply) {
-                  request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                    .form(responseJSON);
+                  textResponses.forEach((textResponse) => {
+                    request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                      .form(textResponse);
+                  });
                 }
 
                 if (isCard) {
