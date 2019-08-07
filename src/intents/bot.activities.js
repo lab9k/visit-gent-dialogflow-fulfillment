@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
-const { Suggestion } = require('dialogflow-fulfillment');
+const { Suggestion, Payload } = require('dialogflow-fulfillment');
 const i18n = require('i18n');
+
 
 module.exports = {
   key: 'bot.activities',
@@ -25,6 +26,6 @@ module.exports = {
         },
       ],
     };
-    agent.add(reply);
+    agent.add(new Payload('FACEBOOK', reply));
   },
 };
