@@ -26,6 +26,7 @@ module.exports = {
         },
       ],
     };
+    agent.requestSource = agent.PLATFORM_UNSPECIFIED;
     agent.add(new Payload('FACEBOOK', reply));
   },
 };
