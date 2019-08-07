@@ -32,5 +32,6 @@
     "error": {
         "unspecific": "Something went wrong.",
         "404": "The page was not found."
-      }
+      },
+    "What kind of attraction would you like":"What kind of attraction would you like"
 }

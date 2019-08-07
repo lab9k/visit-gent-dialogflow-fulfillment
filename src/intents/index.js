@@ -3,7 +3,9 @@ const events = require('./bot.events');
 const activities = require('./bot.activities');
 const attractionsSubject = require('./bot.attractions.subject');
 const attractionsSubjectLocation = require('./bot.attractions.subject.location');
+const attractions = require('./bot.attractions');
 
+intentMap.set('bot.attractions', attractions.handler);
 intentMap.set('bot.events', events.handler);
 intentMap.set('bot.events.direct', events.handler);
 intentMap.set('bot.activities', activities.handler);
