@@ -164,6 +164,7 @@ module.exports = {
                         },
                       ],
                     };
+                    responseJSONCard.message.attachment.payload.elements.push(responseJSON);
                   }
                 });
 
