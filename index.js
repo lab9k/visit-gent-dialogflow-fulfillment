@@ -19,6 +19,7 @@ app.get('/webhook', webhook.get);
 app.post('/webhook', webhook.post);
 dotenv.config();
 
+// SENDER ID: 2873207046042391
 
 i18n.configure({
   locales: ['en', 'nl', 'fr', 'es', 'de'],
@@ -30,101 +31,93 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   const dialog = new DialogFlow('visit-gent-qghbjt');
 
-  dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
-    console.log(JSON.stringify(resultMessages));
-    let responseJSON;
-    let isCard = false;
-    let isQuickReply = false;
-    let quickReply;
-    const textResponses = [];
-    const responseJSONCard = {
-      messaging_type: 'RESPONSE',
-      recipient: {
-        id: '2873207046042391',
-      },
-      message: {
-        attachment: {
-          type: 'template',
-          payload: {
-            template_type: 'generic',
-            elements: [
-            ],
+  dialog.sendTextMessageToDialogFlow('what can I do today?', '1')
+    .then((sendMessages) => {
+      console.log(sendMessages);
+      let quickReply;
+      let isCard = false;
+      let isQuickReply = false;
+      const textResponses = [];
+      let responseJSON = {
+        messaging_type: 'RESPONSE',
+        recipient: {
+          id: '2873207046042391',
+        },
+        message: {
+          quick_replies: [],
+          text: '',
+        },
+      }; const responseJSONCard = {
+        messaging_type: 'RESPONSE',
+        recipient: {
+          id: '2873207046042391',
+        },
+        message: {
+          attachment: {
+            type: 'template',
+            payload: {
+              template_type: 'generic',
+              elements: [
+              ],
+            },
           },
         },
-      },
-    };
+      };
 
-    resultMessages.forEach((e) => {
-      if (e.message === 'quickReplies') {
-        isQuickReply = true;
-        // Quick Reply
-        responseJSON = {
-          messaging_type: 'RESPONSE',
-          recipient: {
-            id: '2873207046042391',
-          },
-          message: {
-            quick_replies: [],
-            text: e.quickReplies.title,
-          },
-        };
-        e.quickReplies.quickReplies.forEach((reply) => {
-          quickReply = {
-            content_type: 'text',
-            title: reply,
-            payload: '<POSTBACK_PAYLOAD>',
-          };
-          responseJSON.message.quick_replies.push(quickReply);
-        });
-        request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-          .form(responseJSON);
-      } else if (e.message === 'text') {
-        // Text
-        responseJSON = {
-          messaging_type: 'RESPONSE',
-          recipient: {
-            id: '2873207046042391',
-          },
-          message: {
-            text: e.text.text[0],
-          },
-        };
-        textResponses.push(responseJSON);
-      } else if (e.message === 'card') {
-        isCard = true;
-        responseJSON = {
-          title: e.card.title,
-          image_url: e.card.imageUri,
-          subtitle: e.card.subtitle,
-          default_action: {
-            type: 'web_url',
-            url: e.card.buttons[0].postback,
-            webview_height_ratio: 'tall',
-          },
-          buttons: [
-            {
+      sendMessages.forEach((sendMessage) => {
+        if (sendMessage.message === 'quickReplies') {
+          isQuickReply = true;
+          // Quick Reply
+          // responseJSON.message.text = sendMessage.quickReplies.title;
+          sendMessage.quickReplies.quickReplies.forEach((reply) => {
+            quickReply = {
+              content_type: 'text',
+              title: reply,
+              payload: '<POSTBACK_PAYLOAD>',
+            };
+            responseJSON.message.quick_replies.push(quickReply);
+          });
+          /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+            .form(responseJSON); */
+        } else if (sendMessage.message === 'text') {
+          // Text
+          // eslint-disable-next-line prefer-destructuring
+          responseJSON.message.text = sendMessage.text.text[0];
+          textResponses.push(responseJSON);
+        } else if (sendMessage.message === 'card') {
+          // Card
+
+          isCard = true;
+          responseJSON = {
+            title: sendMessage.card.title,
+            image_url: sendMessage.card.imageUri,
+            subtitle: sendMessage.card.subtitle,
+            default_action: {
               type: 'web_url',
-              url: e.card.buttons[0].postback,
-              title: 'View Website',
+              url: sendMessage.card.buttons[0].postback,
+              webview_height_ratio: 'tall',
             },
-          ],
-        };
-        responseJSONCard.message.attachment.payload.elements.push(responseJSON);
-      }
-    });
-
-    if (!isQuickReply) {
+            buttons: [
+              {
+                type: 'web_url',
+                url: sendMessage.card.buttons[0].postback,
+                title: 'View Website',
+              },
+            ],
+          };
+          responseJSONCard.message.attachment.payload.elements.push(responseJSON);
+        }
+      });
       textResponses.forEach((textResponse) => {
         request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
           .form(textResponse);
       });
-    }
 
-    if (isCard) {
-      request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-        .form(responseJSONCard);
-    }
-  });
+      if (isCard) {
+        request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+          .form(responseJSONCard);
+      }
+    });
 });
 
 class DialogFlow {
