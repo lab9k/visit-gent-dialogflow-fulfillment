@@ -9,7 +9,7 @@ module.exports = {
   handler(agent) {
     const fetchedAttractions = fetchAttractions(agent.context
       .get('botattractionssubject-followup').parameters.subject);
-    console(`Subject: ${agent.context
+    console.log(`Subject: ${agent.context
       .get('botattractionssubject-followup').parameters.subject}`);
     return fetchedAttractions.then((res) => {
       if (res.length < 1) {
