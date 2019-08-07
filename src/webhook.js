@@ -88,7 +88,7 @@ module.exports = {
               LANGUAGE_CODE = JSON.parse(response.body).locale;
               const dialog = new DialogFlow('visit-gent-qghbjt');
               console.log(message);
-              dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
+              dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessages) => {
                 let responseJSON;
                 let isCard = false;
                 let isQuickReply = false;

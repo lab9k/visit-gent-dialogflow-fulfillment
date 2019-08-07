@@ -30,7 +30,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   const dialog = new DialogFlow('visit-gent-qghbjt');
 
-  dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
+  dialog.sendTextMessageToDialogFlow('Hello', '1').then((resultMessages) => {
     /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
       .form({
         messaging_type: 'RESPONSE',
@@ -43,6 +43,7 @@ app.listen(port, () => {
     let isCard = false;
     let isQuickReply = false;
     let quickReply;
+    const textResponses = [];
     const responseJSONCard = {
       messaging_type: 'RESPONSE',
       recipient: {
@@ -95,6 +96,7 @@ app.listen(port, () => {
             text: e.text.text[0],
           },
         };
+        textResponses.push(responseJSON);
       } else if (e.card !== undefined) {
         isCard = true;
         responseJSON = {
@@ -118,8 +120,10 @@ app.listen(port, () => {
     });
 
     if (!isQuickReply) {
-      request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-        .form(responseJSON);
+      textResponses.forEach((textResponse) => {
+        request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+          .form(textResponse);
+      });
     }
 
     if (isCard) {
