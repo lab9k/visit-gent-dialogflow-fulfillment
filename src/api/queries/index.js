@@ -68,7 +68,7 @@ const QueryType = {
     ?attraction n3:image ?image .
     FILTER (langMatches(lang(?n), lang(?desc))) .
     FILTER (langMatches(lang(?n), "{% lang %}")) .
-    FILTER (langMatches(lang(?nameSubject), "{% lang %}")) .
+    FILTER (langMatches(lang(?nameSubject), "en")) .
     FILTER(CONTAINS(?nameSubject ,"{% subject %}")).
     FILTER(CONTAINS(?url, "/en/")).
   {

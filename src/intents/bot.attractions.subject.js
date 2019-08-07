@@ -17,6 +17,7 @@ module.exports = {
       } else {
         let i;
         let card;
+        // todo: delete subject
         agent.add(`Looking for ${agent.context
           .get('botattractionssubject-followup').parameters.subject}`);
         for (i = 0; i < res.length && i < 10; i += 1) {
