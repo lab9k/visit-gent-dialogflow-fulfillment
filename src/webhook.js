@@ -88,20 +88,11 @@ module.exports = {
               LANGUAGE_CODE = JSON.parse(response.body).locale;
               const dialog = new DialogFlow('visit-gent-qghbjt');
               console.log(message);
-              dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessages) => {
-                console.log(resultMessages);
-                request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                  .form({
-                    messaging_type: 'RESPONSE',
-                    recipient: {
-                      id: senderId,
-                    },
-                    sender_action: 'typing_on',
-                  });
+              dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
                 let responseJSON;
                 let isCard = false;
+                let isQuickReply = false;
                 let quickReply;
-                const result = [];
                 const responseJSONCard = {
                   messaging_type: 'RESPONSE',
                   recipient: {
@@ -118,20 +109,10 @@ module.exports = {
                     },
                   },
                 };
+
                 resultMessages.forEach((e) => {
-                  if (e.text !== undefined) {
-                    // Text
-                    responseJSON = {
-                      messaging_type: 'RESPONSE',
-                      recipient: {
-                        id: senderId,
-                      },
-                      message: {
-                        text: e.text.text[0],
-                      },
-                    };
-                    result.push(responseJSON);
-                  } else if (e.quickReplies !== undefined) {
+                  if (e.quickReplies !== undefined) {
+                    isQuickReply = true;
                     // Quick Reply
                     responseJSON = {
                       messaging_type: 'RESPONSE',
@@ -151,7 +132,19 @@ module.exports = {
                       };
                       responseJSON.message.quick_replies.push(quickReply);
                     });
-                    result.push(responseJSON);
+                    request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                      .form(responseJSON);
+                  } else if (e.text !== undefined) {
+                    // Text
+                    responseJSON = {
+                      messaging_type: 'RESPONSE',
+                      recipient: {
+                        id: senderId,
+                      },
+                      message: {
+                        text: e.text.text[0],
+                      },
+                    };
                   } else if (e.card !== undefined) {
                     isCard = true;
                     responseJSON = {
@@ -171,31 +164,18 @@ module.exports = {
                         },
                       ],
                     };
-                    responseJSONCard.message.attachment.payload.elements.push(responseJSON);
                   }
                 });
 
-                result.forEach((resArray) => {
+                if (!isQuickReply) {
                   request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                    .form(resArray);
-                });
+                    .form(responseJSON);
+                }
 
                 if (isCard) {
                   request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                     .form(responseJSONCard);
                 }
-                /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                  .form(
-                    {
-                      messaging_type: 'RESPONSE',
-                      recipient: {
-                        id: senderId,
-                      },
-                      message: {
-                        text: resultMessage,
-                      },
-                    },
-                  ); */
               });
             });
         }
