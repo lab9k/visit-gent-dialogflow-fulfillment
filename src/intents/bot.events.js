@@ -11,7 +11,7 @@ module.exports = {
     console.log(agent.parameters.eventTime);
 
     if ((agent.context.get('time') === undefined || agent.context.get('time').parameters.time === '') && agent.parameters.eventTime === '') {
-      agent.add('What day are you looking for events?');
+      agent.add(`${i18n.__('What day are you looking for events')}?`);
     } else {
       let time;
       if (agent.parameters.eventTime !== '') {

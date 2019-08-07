@@ -28,5 +28,12 @@
     "Location not found in Ghent":"Ubicación no encontrada en Gante",
     "No attractions found in the provided neighbourhood":"No se encontraron atracciones turísticas en el vecindario proporcionado",
     "Attractions":"Atracciones turísticas",
-    "View Website":"Ver sitio web"
+    "View Website":"Ver sitio web",
+    "error": {
+        "unspecific": "Algo salió mal.",
+        "404": "La página no fue encontrada."
+      },
+    "What kind of attraction are you looking for":"¿Qué tipo de atracción estás buscando?",
+    "Tourist attractions found":"Atracciones turísticas encontradas",
+    "What day are you looking for events":"¿Qué día estás buscando eventos?"
 }

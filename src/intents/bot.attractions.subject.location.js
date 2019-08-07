@@ -18,7 +18,7 @@ function requestLocation(location, agent) {
 module.exports = {
   key: 'bot.attractions.subject.location',
   handler(agent) {
-    agent.add(i18n.__(`Looking for ${agent.context.get('botattractionssubject-followup').parameters.subject}`));
+    agent.add(`${i18n.__('Tourist attractions found')}:`);
     const fetchedLocation = requestLocation(agent.parameters.address, agent);
     const fetchedAttractions = fetchAttractions(agent.context.get('botattractionssubject-followup').parameters.subject);
     const fetched = Promise.all([fetchedLocation, fetchedAttractions]);
