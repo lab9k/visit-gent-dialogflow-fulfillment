@@ -31,6 +31,7 @@ app.listen(port, () => {
   const dialog = new DialogFlow('visit-gent-qghbjt');
 
   dialog.sendTextMessageToDialogFlow('events today', '1').then((resultMessages) => {
+    console.log(JSON.stringify(resultMessages));
     /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
       .form({
         messaging_type: 'RESPONSE',

@@ -12,8 +12,6 @@ module.exports = {
 
     if ((agent.context.get('time') === undefined || agent.context.get('time').parameters.time === '') && agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
-      agent.add('test');
-      agent.add('test2');
     } else {
       let time;
       if (agent.parameters.eventTime !== '') {
@@ -29,6 +27,8 @@ module.exports = {
           agent.add(i18n.__('No events found'));
         } else {
           agent.add(`${i18n.__('Top 3 events')}: `);
+          agent.add('Test1');
+          agent.add('Test2');
           let i;
           let card;
           for (i = 0; i < res.length; i += 1) {
