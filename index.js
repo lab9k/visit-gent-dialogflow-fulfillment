@@ -1,12 +1,12 @@
-const dialogflow = require('dialogflow');
+// const dialogflow = require('dialogflow');
 const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const request = require('request');
+// const request = require('request');
 const fulfillment = require('./src/fulfillment');
 const knowledge = require('./src/knowledge');
-const webhook = require('./src/webhook');
+const webhook = require('./src/webhookMessenger');
 
 
 const app = express();
@@ -19,8 +19,6 @@ app.get('/webhook', webhook.get);
 app.post('/webhook', webhook.post);
 dotenv.config();
 
-// SENDER ID: 2873207046042391
-
 i18n.configure({
   locales: ['en', 'nl', 'fr', 'es', 'de'],
   directory: `${__dirname}/locales`,
@@ -29,11 +27,11 @@ i18n.configure({
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  const dialog = new DialogFlow('visit-gent-qghbjt');
+  console.log(`App listening on port ${port}`);
 
-  dialog.sendTextMessageToDialogFlow('i am looking for a pub', '1')
+  /* const dialog = new DialogFlow('visit-gent-qghbjt');
+  dialog.sendTextMessageToDialogFlow('hello', '1')
     .then((sendMessages) => {
-      console.log(sendMessages);
       let quickReply;
       let isCard = false;
       let isQuickReply = false;
@@ -76,10 +74,10 @@ app.listen(port, () => {
               payload: '<POSTBACK_PAYLOAD>',
             };
             responseJSON.message.quick_replies.push(quickReply);
-          });
-          /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+          }); */
+  /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
             .form(responseJSON); */
-        } else if (sendMessage.message === 'text') {
+  /* } else if (sendMessage.message === 'text') {
           // Text
           // eslint-disable-next-line prefer-destructuring
           responseJSON.message.text = sendMessage.text.text[0];
@@ -117,9 +115,9 @@ app.listen(port, () => {
         request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
           .form(responseJSONCard);
       }
-    });
+    }); */
 });
-
+/*
 class DialogFlow {
   constructor(projectId) {
     this.projectId = projectId;
@@ -156,4 +154,4 @@ class DialogFlow {
       throw err;
     }
   }
-}
+} */

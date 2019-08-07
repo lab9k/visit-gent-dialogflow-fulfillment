@@ -1,5 +1,4 @@
 {
-    "Hello World": "Hallo Wereld",
     "Hello": "Hallo",
     "Looking for events": "Zoeken naar evenementen",
     "Top 3 events": "Top 3 evenementen",
@@ -8,32 +7,26 @@
     "From": "Van",
     "To": "Tot",
     "Go to website": "Ga naar website",
-    "Place to stay": "Plek om te verblijven",
-    "Food and drinks": "Eten en drinken",
-    "Things to see/do": "Bezienswaardigheden",
     "Event": "Evenement",
     "Attraction": "Toeristische attractie",
     "What kind of activity would you like to do": "Wat soort activiteit wil je doen",
-    "stay": "plaatsen om overnachten",
-    "eat_drink": "plaatsen om iets te eten of drinken",
-    "see_do": "plaatsen om te bezoeken",
     "Choose a category": "Kies een categorie",
-    "today": "today",
-    "tomorrow": "morgen",
-    "in 2 days": "overmorgen",
     "No attractions found":"Geen toeristische attracties gevonden",
     "No events found":"Geen evenementen gevonden",
     "Events":"Evenementen",
     "Location not found":"Locatie niet gevonden",
     "Location not found in Ghent":"Locatie niet gevonden in Gent",
     "No attractions found in the provided neighbourhood":"Geen toeristische attracties gevonden voor de opgegeven buurt",
-    "Attractions":"Tourist attractions",
-    "View Website":"View Website",
+    "Attractions":"Toeristische attracties",
+    "View Website":"Bekijk website",
     "error": {
-        "unspecific": "Something went wrong.",
-        "404": "The page was not found."
+        "unspecific": "Er is iets fout gegaan.",
+        "404": "De pagina is niet gevonden."
       },
-    "What kind of attraction are you looking for":"What kind of attraction are you looking for",
-    "Tourist attractions found":"Tourist attractions found",
-    "What day are you looking for events":"What day are you looking for events"
+    "What kind of attraction are you looking for":"Wat voor attractie zoekt u",
+    "Tourist attractions found":"Gevonden toeristische attracties",
+    "What day are you looking for events":"Welke dag bent u op zoek naar evenementen",
+    "Would you like to provide a location":"Wilt u een locatie opgeven",
+    "Yes":"Ja",
+    "No":"Nee"
 }

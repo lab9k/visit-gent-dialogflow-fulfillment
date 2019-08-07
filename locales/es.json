@@ -1,5 +1,4 @@
 {
-	"Hello World": "Hola Mundo",
     "Hello": "Hola",
     "Looking for events": "Buscando eventos",
     "Top 3 events": "Top 3 eventos",
@@ -8,19 +7,10 @@
     "From":"De",
     "To":"A",
     "Go to website":"Ir al sitio web",
-    "Place to stay":"Lugar para quedarse",
-    "Food and drinks":"Alimentos y bebidas",
-    "Things to see/do":"Cosas para ver / hacer",
     "Event":"Evento",
     "Attraction":"Atracción turística",
     "What kind of activity would you like to do":"¿Qué tipo de actividad te gustaría hacer?",
-    "stay":"lugares para quedarse",
-    "eat_drink":"lugares para comer o beber algo",
-    "see_do":"lugares que ver",
     "Choose a category":"Elige una categoría",
-    "today":"hoy",
-    "tomorrow":"mañana",
-    "in 2 days":"en 2 días",
     "No attractions found":"No se encontraron atracciones turísticas",
     "No events found":"No se encontraron eventos.",
     "Events":"eventos",
@@ -33,7 +23,10 @@
         "unspecific": "Algo salió mal.",
         "404": "La página no fue encontrada."
       },
-    "What kind of attraction are you looking for":"¿Qué tipo de atracción estás buscando?",
+    "What kind of attraction are you looking for":"¿Qué tipo de atracción estás buscando",
     "Tourist attractions found":"Atracciones turísticas encontradas",
-    "What day are you looking for events":"¿Qué día estás buscando eventos?"
+    "What day are you looking for events":"¿Qué día estás buscando eventos",
+    "Would you like to provide a location":"¿Desea proporcionar una ubicación",
+    "Yes":"Sí",
+    "No":"No"
 }

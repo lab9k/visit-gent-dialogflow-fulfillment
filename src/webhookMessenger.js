@@ -86,7 +86,6 @@ module.exports = {
                 .then((sendMessages) => {
                   let quickReply;
                   let isCard = false;
-                  let isQuickReply = false;
                   const textResponses = [];
                   let responseJSON = {
                     messaging_type: 'RESPONSE',
@@ -116,7 +115,6 @@ module.exports = {
 
                   sendMessages.forEach((sendMessage) => {
                     if (sendMessage.message === 'quickReplies') {
-                      isQuickReply = true;
                       // Quick Reply
                       // responseJSON.message.text = sendMessage.quickReplies.title;
                       sendMessage.quickReplies.quickReplies.forEach((reply) => {

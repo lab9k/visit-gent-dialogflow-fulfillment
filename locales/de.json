@@ -1,0 +1,32 @@
+{
+    "Hello": "Hallo",
+    "Looking for events": "Events suchen",
+    "Top 3 events": "Top 3 Veranstaltungen",
+    "Looking for attractions": "Auf der Suche nach Touristenattraktionen",
+    "Top 3 attractions" : "Top 3 Sehenswürdigkeiten",
+    "From":"Von",
+    "To":"Zu",
+    "Go to website":"Gehen Sie zur Webseite",
+    "Event":"Veranstaltung",
+    "Attraction":"Touristenattraktion",
+    "What kind of activity would you like to do":"Welche Art von Aktivität würden Sie gerne machen",
+    "Choose a category":"Wähle eine Kategorie",
+    "No attractions found":"Keine touristischen Attraktionen gefunden",
+    "No events found":"Keine Termine gefunden",
+    "Events":"Veranstaltungen",
+    "Location not found":"Standort nicht gefunden",
+    "Location not found in Ghent":"Ort nicht in Gent gefunden",
+    "No attractions found in the provided neighbourhood":"Keine Touristenattraktionen in der angegebenen Umgebung gefunden",
+    "Attractions":"Touristenattraktionen",
+    "View Website":"Website anzeigen",
+    "error": {
+        "unspecific": "Etwas ist schief gelaufen.",
+        "404": "Die Seite wurde nicht gefunden."
+      },
+    "What kind of attraction are you looking for":"Welche Art von Attraktion suchen Sie",
+    "Tourist attractions found":"Touristenattraktionen gefunden",
+    "What day are you looking for events":"An welchem Tag suchst du Events",
+    "Would you like to provide a location":"Möchten Sie einen Standort angeben",
+    "Yes":"Ja",
+    "No":"Nein"
+}

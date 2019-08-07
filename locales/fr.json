@@ -1,1 +1,32 @@
-{}
+{
+    "Hello": "Bonjour",
+    "Looking for events": "À la recherche d'événements",
+    "Top 3 events": "Top 3 des événements",
+    "Looking for attractions": "À la recherche d'attraction touristique",
+    "Top 3 attractions" : "Top 3 des attractions touristiques",
+    "From":"Du",
+    "To":"Au",
+    "Go to website":"Aller sur un site Internet",
+    "Event":"Événement",
+    "Attraction":"Attraction touristique",
+    "What kind of activity would you like to do":"Quel genre d'activité aimerais-tu faire",
+    "Choose a category":"Choisissez une catégorie",
+    "No attractions found":"Aucune attraction touristique trouvée",
+    "No events found":"Aucun événement trouvé",
+    "Events":"Événements",
+    "Location not found":"Lieu non trouvé",
+    "Location not found in Ghent":"Lieu non trouvé à Gand",
+    "No attractions found in the provided neighbourhood":"Aucune attraction touristique trouvée dans le voisinage prévu",
+    "Attractions":"Attractions touristiques",
+    "View Website":"Voir le site web",
+    "error": {
+        "unspecific": "Quelque chose s'est mal passé.",
+        "404": "La page n'a pas été trouvé."
+      },
+    "What kind of attraction are you looking for":"Quel type d'attraction cherchez-vous",
+    "Tourist attractions found":"Attractions touristiques trouvées",
+    "What day are you looking for events":"Quel jour cherchez-vous des événements",
+    "Would you like to provide a location":"Voulez-vous fournir un emplacement",
+    "Yes":"Oui",
+    "No":"Non"
+}
