@@ -9,6 +9,8 @@ module.exports = {
   handler(agent) {
     const fetchedAttractions = fetchAttractions(agent.context
       .get('botattractionssubject-followup').parameters.subject);
+    console(`Subject: ${agent.context
+      .get('botattractionssubject-followup').parameters.subject}`);
     return fetchedAttractions.then((res) => {
       if (res.length < 1) {
         agent.add(i18n.__('No attractions found'));
