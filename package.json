@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint src/**",
+    "prestart": "npm run lint"
   },
   "repository": {
     "type": "git",
