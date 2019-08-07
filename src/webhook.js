@@ -28,9 +28,7 @@ class DialogFlow {
       queryInput: {
         text: {
           text: textMessage,
-          // TODO
-          // languageCode: LANGUAGE_CODE,
-          languageCode: 'en',
+          languageCode: LANGUAGE_CODE,
 
         },
       },
@@ -86,8 +84,8 @@ module.exports = {
           request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
               LANGUAGE_CODE = JSON.parse(response.body).locale;
+              console.log(LANGUAGE_CODE);
               const dialog = new DialogFlow('visit-gent-qghbjt');
-              console.log(message);
               dialog.sendTextMessageToDialogFlow(message, '1').then((resultMessages) => {
                 let responseJSON;
                 let isCard = false;
