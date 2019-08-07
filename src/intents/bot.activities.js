@@ -7,6 +7,9 @@ module.exports = {
   handler(agent) {
     agent.add(new Suggestion(`${i18n.__('Events')}`));
     agent.add(new Suggestion(i18n.__('Attractions')));
-    agent.add(`${i18n.__('What kind of activity would you like to do')}?`);
+    agent.add(new Suggestion({
+      title: `${i18n.__('What kind of activity would you like to do')}?`,
+      platform: 'FACEBOOK',
+    }));
   },
 };

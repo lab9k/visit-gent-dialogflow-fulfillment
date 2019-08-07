@@ -32,16 +32,17 @@ app.listen(port, () => {
 
   dialog.sendTextMessageToDialogFlow('i am looking for a pub', '1').then((resultMessages) => {
     console.log(JSON.stringify(resultMessages));
-    request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+    /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
       .form({
         messaging_type: 'RESPONSE',
         recipient: {
           id: '2873207046042391',
         },
         sender_action: 'typing_on',
-      });
+      }); */
     let responseJSON;
     let isCard = false;
+    let isQuickReply = false;
     let quickReply;
     const responseJSONCard = {
       messaging_type: 'RESPONSE',
@@ -62,6 +63,7 @@ app.listen(port, () => {
 
     resultMessages.forEach((e) => {
       if (e.quickReplies !== undefined) {
+        isQuickReply = true;
         // Quick Reply
         responseJSON = {
           messaging_type: 'RESPONSE',
@@ -81,6 +83,8 @@ app.listen(port, () => {
           };
           responseJSON.message.quick_replies.push(quickReply);
         });
+        request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+          .form(responseJSON);
       } else if (e.text !== undefined) {
         // Text
         responseJSON = {
@@ -112,9 +116,12 @@ app.listen(port, () => {
           ],
         };
       }
+    });
+
+    if (!isQuickReply) {
       request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
         .form(responseJSON);
-    });
+    }
 
     if (isCard) {
       request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
