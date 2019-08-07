@@ -118,7 +118,7 @@ module.exports = {
                     if (sendMessage.message === 'quickReplies') {
                       isQuickReply = true;
                       // Quick Reply
-                      responseJSON.message.text = sendMessage.quickReplies.title;
+                      // responseJSON.message.text = sendMessage.quickReplies.title;
                       sendMessage.quickReplies.quickReplies.forEach((reply) => {
                         quickReply = {
                           content_type: 'text',
@@ -127,15 +127,16 @@ module.exports = {
                         };
                         responseJSON.message.quick_replies.push(quickReply);
                       });
-                      request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                        .form(responseJSON);
+                      /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                        .form(responseJSON); */
                     } else if (sendMessage.message === 'text') {
-                    // Text
-                    // eslint-disable-next-line prefer-destructuring
+                      // Text
+                      // eslint-disable-next-line prefer-destructuring
                       responseJSON.message.text = sendMessage.text.text[0];
                       textResponses.push(responseJSON);
                     } else if (sendMessage.message === 'card') {
-                    // Card
+                      // Card
+
                       isCard = true;
                       responseJSON = {
                         title: sendMessage.card.title,
@@ -157,13 +158,10 @@ module.exports = {
                       responseJSONCard.message.attachment.payload.elements.push(responseJSON);
                     }
                   });
-
-                  if (!isQuickReply) {
-                    textResponses.forEach((textResponse) => {
-                      request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                        .form(textResponse);
-                    });
-                  }
+                  textResponses.forEach((textResponse) => {
+                    request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                      .form(textResponse);
+                  });
 
                   if (isCard) {
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)

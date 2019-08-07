@@ -31,7 +31,7 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   const dialog = new DialogFlow('visit-gent-qghbjt');
 
-  dialog.sendTextMessageToDialogFlow('what can I do today?', '1')
+  dialog.sendTextMessageToDialogFlow('i am looking for a pub', '1')
     .then((sendMessages) => {
       console.log(sendMessages);
       let quickReply;
