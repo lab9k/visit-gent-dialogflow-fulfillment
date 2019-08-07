@@ -12,6 +12,8 @@ module.exports = {
 
     if ((agent.context.get('time') === undefined || agent.context.get('time').parameters.time === '') && agent.parameters.eventTime === '') {
       agent.add('What day are you looking for events?');
+      agent.add('test');
+      agent.add('test2');
     } else {
       let time;
       if (agent.parameters.eventTime !== '') {

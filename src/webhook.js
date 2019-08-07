@@ -68,7 +68,7 @@ module.exports = {
   },
   post(req, res) {
     const { body } = req;
-    console.log(JSON.stringify(body));
+
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
       // Iterates over each entry - there may be multiple if batched
