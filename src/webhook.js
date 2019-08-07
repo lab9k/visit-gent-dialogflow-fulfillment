@@ -95,7 +95,7 @@ module.exports = {
                 const responseJSONCard = {
                   messaging_type: 'RESPONSE',
                   recipient: {
-                    id: '2873207046042391',
+                    id: senderId,
                   },
                   message: {
                     attachment: {
@@ -116,7 +116,7 @@ module.exports = {
                     responseJSON = {
                       messaging_type: 'RESPONSE',
                       recipient: {
-                        id: '2873207046042391',
+                        id: senderId,
                       },
                       message: {
                         quick_replies: [],
@@ -138,7 +138,7 @@ module.exports = {
                     responseJSON = {
                       messaging_type: 'RESPONSE',
                       recipient: {
-                        id: '2873207046042391',
+                        id: senderId,
                       },
                       message: {
                         text: e.text.text[0],
