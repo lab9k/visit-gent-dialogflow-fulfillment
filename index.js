@@ -28,46 +28,10 @@ i18n.configure({
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  // const dialog = new DialogFlow('visit-gent-qghbjt');
-  const list = {
-    recipient: {
-      id: '2873207046042391',
-    },
-    message: {
-      attachment: {
-        type: 'template',
-        payload: {
-          template_type: 'list',
-          top_element_style: 'compact',
-          elements: [
-            {
-              title: 'Classic T-Shirt Collection',
-              subtitle: 'See all our colors',
+  const dialog = new DialogFlow('visit-gent-qghbjt');
 
-            },
-            {
-              title: 'Classic T-Shirt Collection',
-              subtitle: 'See all our colors',
-
-            },
-            {
-              title: 'Classic T-Shirt Collection',
-              subtitle: 'See all our colors',
-
-            },
-          ],
-        },
-      },
-    },
-
-  };
-
-  request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-    .form(list);
-  /*
   dialog.sendTextMessageToDialogFlow('what can I do today?', '1').then((resultMessages) => {
     console.log(JSON.stringify(resultMessages));
-
     let responseJSON;
     let isCard = false;
     let isQuickReply = false;
@@ -160,7 +124,7 @@ app.listen(port, () => {
       request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
         .form(responseJSONCard);
     }
-  }); */
+  });
 });
 
 class DialogFlow {

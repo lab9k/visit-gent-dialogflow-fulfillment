@@ -9,9 +9,9 @@ module.exports = {
     const quickReplies = new Suggestion({
       title: `${i18n.__('What kind of activity would you like to do')}?`,
     });
-    // quickReplies.addReply_(i18n.__('Events'));
-    // quickReplies.addReply_(i18n.__('Attractions'));
-    // agent.add(quickReplies);
+    quickReplies.addReply_(i18n.__('Events'));
+    quickReplies.addReply_(i18n.__('Attractions'));
+    agent.add(quickReplies);
     const reply = {
       messages: [
         {
@@ -27,6 +27,6 @@ module.exports = {
       ],
     };
 
-    agent.add(new Payload('PLATFORM_UNSPECIFIED', reply, true, true));
+    // agent.add(new Payload('PLATFORM_UNSPECIFIED', reply, true, true));
   },
 };
