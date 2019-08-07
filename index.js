@@ -21,7 +21,7 @@ dotenv.config();
 
 
 i18n.configure({
-  locales: ['en', 'nl', 'fr'],
+  locales: ['en', 'nl', 'fr', 'es', 'de'],
   directory: `${__dirname}/locales`,
   defaultLocale: 'en',
 });

@@ -8,8 +8,23 @@ module.exports = {
     const quickReplies = new Suggestion({
       title: `${i18n.__('What kind of activity would you like to do')}?`,
     });
-    quickReplies.addReply_(i18n.__('Events'));
-    quickReplies.addReply_(i18n.__('Attractions'));
-    agent.add(quickReplies);
+    // quickReplies.addReply_(i18n.__('Events'));
+    // quickReplies.addReply_(i18n.__('Attractions'));
+    // agent.add(quickReplies);
+    const reply = {
+      messages: [
+        {
+          platform: 'facebook',
+          replies: [
+            'Quick reply 1',
+            'Quick reply 2',
+            'Quick reply 3',
+          ],
+          title: 'Quick Reply Title',
+          type: 2,
+        },
+      ],
+    };
+    agent.add(reply);
   },
 };

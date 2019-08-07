@@ -27,8 +27,6 @@ module.exports = {
           agent.add(i18n.__('No events found'));
         } else {
           agent.add(`${i18n.__('Top 3 events')}: `);
-          agent.add('Test1');
-          agent.add('Test2');
           let i;
           let card;
           for (i = 0; i < res.length; i += 1) {

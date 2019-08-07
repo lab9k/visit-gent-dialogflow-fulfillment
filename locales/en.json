@@ -19,7 +19,7 @@
     "see_do":"places to see",
     "Choose a category":"Choose a category",
     "today":"today",
-    "tomorrow":"tommorow",
+    "tomorrow":"tomorrow",
     "in 2 days":"in 2 days",
     "No attractions found":"No tourist attractions found",
     "No events found":"No events found",
@@ -27,5 +27,10 @@
     "Location not found":"Location not found",
     "Location not found in Ghent":"Location not found in Ghent",
     "No attractions found in the provided neighbourhood":"No tourist attractions found in the provided neighbourhood",
-    "Attractions":"Tourist attractions"
+    "Attractions":"Tourist attractions",
+    "View Website":"View Website",
+    "error": {
+        "unspecific": "Something went wrong.",
+        "404": "The page was not found."
+      }
 }
