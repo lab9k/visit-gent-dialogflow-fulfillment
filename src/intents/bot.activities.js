@@ -27,7 +27,6 @@ module.exports = {
       ],
     };
 
-    agent.requestSource = agent.PLATFORM_UNSPECIFIED;
-    agent.add(new Payload('PLATFORM_UNSPECIFIED', reply));
+    agent.add(new Payload('PLATFORM_UNSPECIFIED', reply, true, true));
   },
 };
