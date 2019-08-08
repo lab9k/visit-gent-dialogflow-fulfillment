@@ -6,13 +6,8 @@ const { QueryType } = require('./queries/index');
 
 function formatDate(date) {
   // Format: yyyy-mm-dd
-  // Month + 1 because Javascript starts at 0
   return dateFormat(date, 'yyyy-mm-dd');
 }
-
-// function addDays(date, days) {
-//   return date.setDate(date.getDate() + days);
-// }
 
 module.exports = {
   buildAttractionQuery(subject) {
