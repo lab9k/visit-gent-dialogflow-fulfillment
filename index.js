@@ -3,7 +3,6 @@ const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 const fulfillment = require('./src/fulfillment');
-const knowledge = require('./src/knowledge');
 const webhook = require('./src/webhookMessenger');
 
 
@@ -12,7 +11,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(i18n.init);
 app.post('/api', fulfillment);
-app.post('/knowledge', knowledge);
 app.get('/webhook', webhook.get);
 app.post('/webhook', webhook.post);
 dotenv.config();

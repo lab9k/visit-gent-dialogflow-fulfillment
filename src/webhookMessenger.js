@@ -74,6 +74,7 @@ module.exports = {
         // Gets the message. entry.messaging is an array, but
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0];
+        // only answer if the message is not null
         if (webhookEvent.message !== undefined) {
           const receivedMessage = webhookEvent.message.text;
           const senderId = webhookEvent.sender.id;
