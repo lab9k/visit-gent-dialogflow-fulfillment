@@ -79,6 +79,20 @@ module.exports = {
           const senderId = webhookEvent.sender.id;
           request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
+              request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                .form({
+                  recipient: {
+                    id: senderId,
+                  },
+                  sender_action: 'mark_seen',
+                });
+              request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
+                .form({
+                  recipient: {
+                    id: senderId,
+                  },
+                  sender_action: 'typing_on',
+                });
               const languageCode = JSON.parse(response.body).locale;
               const dialogFlowConnection = new DialogFlowConnection('visit-gent-qghbjt');
               dialogFlowConnection
