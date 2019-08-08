@@ -77,8 +77,10 @@ module.exports = {
         if (webhookEvent.message !== undefined) {
           const receivedMessage = webhookEvent.message.text;
           const senderId = webhookEvent.sender.id;
-          request.get(`https://graph.facebook.com/${senderId}?fields=first_name,last_name,locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
+          // get language of sender
+          request.get(`https://graph.facebook.com/${senderId}?fields=locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
+              // post mark seen
               request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                 .form({
                   recipient: {
@@ -86,6 +88,7 @@ module.exports = {
                   },
                   sender_action: 'mark_seen',
                 });
+              // post typing
               request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                 .form({
                   recipient: {
@@ -93,6 +96,7 @@ module.exports = {
                   },
                   sender_action: 'typing_on',
                 });
+
               const languageCode = JSON.parse(response.body).locale;
               const dialogFlowConnection = new DialogFlowConnection('visit-gent-qghbjt');
               dialogFlowConnection
@@ -100,7 +104,8 @@ module.exports = {
                 .then((sendMessages) => {
                   let quickReply;
                   let isCard = false;
-                  const textResponses = [];
+                  const responses = [];
+                  // Template text and quick reply
                   let responseJSON = {
                     messaging_type: 'RESPONSE',
                     recipient: {
@@ -110,7 +115,9 @@ module.exports = {
                       quick_replies: [],
                       text: '',
                     },
-                  }; const responseJSONCard = {
+                  };
+                  // Template card
+                  const responseJSONCard = {
                     messaging_type: 'RESPONSE',
                     recipient: {
                       id: senderId,
@@ -130,7 +137,6 @@ module.exports = {
                   sendMessages.forEach((sendMessage) => {
                     if (sendMessage.message === 'quickReplies') {
                       // Quick Reply
-                      // responseJSON.message.text = sendMessage.quickReplies.title;
                       sendMessage.quickReplies.quickReplies.forEach((reply) => {
                         quickReply = {
                           content_type: 'text',
@@ -139,16 +145,13 @@ module.exports = {
                         };
                         responseJSON.message.quick_replies.push(quickReply);
                       });
-                      /* request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                        .form(responseJSON); */
                     } else if (sendMessage.message === 'text') {
                       // Text
-                      // eslint-disable-next-line prefer-destructuring
-                      responseJSON.message.text = sendMessage.text.text[0];
-                      textResponses.push(responseJSON);
+                      const text = sendMessage.text.text[0];
+                      responseJSON.message.text = text;
+                      responses.push(responseJSON);
                     } else if (sendMessage.message === 'card') {
                       // Card
-
                       isCard = true;
                       responseJSON = {
                         title: sendMessage.card.title,
@@ -170,11 +173,13 @@ module.exports = {
                       responseJSONCard.message.attachment.payload.elements.push(responseJSON);
                     }
                   });
-                  textResponses.forEach((textResponse) => {
+                  // post text and quickReplies to messenger
+                  responses.forEach((textResponse) => {
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                       .form(textResponse);
                   });
 
+                  // post cards to messenger
                   if (isCard) {
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                       .form(responseJSONCard);
