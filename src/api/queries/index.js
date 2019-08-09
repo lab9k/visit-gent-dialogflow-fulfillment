@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-unused-vars
 const QueryType = {
   event:
   `PREFIX schema: <http://schema.org/>

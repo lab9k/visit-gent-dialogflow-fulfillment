@@ -16,6 +16,7 @@ app.post('/webhook', webhook.post);
 dotenv.config();
 
 i18n.configure({
+  // codes of different languages
   locales: ['en', 'nl', 'fr', 'es', 'de'],
   directory: `${__dirname}/locales`,
   defaultLocale: 'en',

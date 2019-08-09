@@ -3,8 +3,12 @@ const dialogflow = require('dialogflow');
 const request = require('request');
 const i18n = require('i18n');
 
-
 class DialogFlowConnection {
+  /**
+   * connect to Dialogflow and initiate the sessionclient
+   * @param {String} projectId id of the Dialogflow project
+   * @class
+   */
   constructor(projectId) {
     this.projectId = projectId;
     const privateKey = (process.env.NODE_ENV === 'production') ? JSON.parse(process.env.DIALOGFLOW_PRIVATE_KEY) : process.env.DIALOGFLOW_PRIVATE_KEY;
@@ -18,6 +22,13 @@ class DialogFlowConnection {
     this.sessionClient = new dialogflow.SessionsClient(config);
   }
 
+  /**
+   * connect to Dialogflow and initiate the sessionclient
+   * @param {String} textMessage message send to Dialogflow
+   * @param {String} sessionId id of session
+   * @param {String} languageCode language of the message
+   * @return response to the sended message
+   */
   async sendTextMessageToDialogFlow(textMessage, sessionId, languageCode) {
     // Define session path
     const sessionPath = this.sessionClient.sessionPath(this.projectId, sessionId);
@@ -43,6 +54,10 @@ class DialogFlowConnection {
 }
 
 module.exports = {
+  /**
+   * GET api
+   * webhook verification
+   */
   get(req, res) {
     // Your verify token. Should be a random string.
     const VERIFY_TOKEN = process.env.MESSENGER_VERIFY_TOKEN;
@@ -65,6 +80,10 @@ module.exports = {
       }
     }
   },
+  /**
+   * POST api
+   * webhook endpoint
+   */
   post(req, res) {
     const { body } = req;
     // Checks this is an event from a page subscription
@@ -81,6 +100,8 @@ module.exports = {
           // get language of sender
           request.get(`https://graph.facebook.com/${senderId}?fields=locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
+              const languageCode = JSON.parse(response.body).locale;
+
               // post mark seen
               request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                 .form({
@@ -89,6 +110,7 @@ module.exports = {
                   },
                   sender_action: 'mark_seen',
                 });
+
               // post typing
               request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                 .form({
@@ -98,15 +120,18 @@ module.exports = {
                   sender_action: 'typing_on',
                 });
 
-              const languageCode = JSON.parse(response.body).locale;
+              // create connection to Dialogflow project
               const dialogFlowConnection = new DialogFlowConnection('visit-gent-qghbjt');
               dialogFlowConnection
                 .sendTextMessageToDialogFlow(receivedMessage, senderId, languageCode)
                 .then((sendMessages) => {
                   let quickReply;
                   let isCard = false;
+
+                  // array for multiple text messages
                   const responses = [];
-                  // Template text and quick reply
+
+                  // JSON text and quick replies
                   let responseJSON = {
                     messaging_type: 'RESPONSE',
                     recipient: {
@@ -117,7 +142,8 @@ module.exports = {
                       text: '',
                     },
                   };
-                  // Template card
+
+                  // JSON card response
                   const responseJSONCard = {
                     messaging_type: 'RESPONSE',
                     recipient: {
@@ -135,9 +161,11 @@ module.exports = {
                     },
                   };
 
+                  // iterate over messages
                   sendMessages.forEach((sendMessage) => {
                     if (sendMessage.message === 'quickReplies') {
                       // Quick Reply
+                      // For each object in the array quickReplies push a quickreply to the response JSON
                       sendMessage.quickReplies.quickReplies.forEach((reply) => {
                         quickReply = {
                           content_type: 'text',
@@ -154,6 +182,7 @@ module.exports = {
                     } else if (sendMessage.message === 'card') {
                       // Card
                       isCard = true;
+
                       responseJSON = {
                         title: sendMessage.card.title,
                         image_url: sendMessage.card.imageUri,
@@ -171,16 +200,20 @@ module.exports = {
                           },
                         ],
                       };
+
                       responseJSONCard.message.attachment.payload.elements.push(responseJSON);
                     }
                   });
+
                   // post text and quickReplies to messenger
+                  // iterates over the different messages and post them to messenger
                   responses.forEach((textResponse) => {
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                       .form(textResponse);
                   });
 
                   // post cards to messenger
+                  // checks if there are any cards
                   if (isCard) {
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
                       .form(responseJSONCard);
