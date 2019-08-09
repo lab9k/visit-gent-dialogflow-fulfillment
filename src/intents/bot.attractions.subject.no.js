@@ -5,7 +5,7 @@ const AttractionCard = require('../models/AttractionCard');
 
 
 module.exports = {
-  key: 'bot.attractions.subject.noLocation',
+  key: 'bot.attractions.subject.no',
   handler(agent) {
     const fetchedAttractions = fetchAttractions(agent.context
       .get('botattractionssubject-followup').parameters.subject);
