@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-// const requestPromise = require('request-promise');
 const requestPromiseNative = require('request-promise-native');
 const i18n = require('i18n');
 const { fetchAttractions } = require('../api/SparqlApi');
@@ -8,14 +7,14 @@ const AttractionCard = require('../models/AttractionCard');
 /**
    * function that calls location api to request the longitude and latitude of a provided address
    * @param {String} address
-   * @return JSON result of the api request with locations that match the address
+   * @return JSON result with locations that match the address
    */
 function requestLocation(address, agent) {
   // add Ghent to the address
   const apiLocation = `${address.replace(/ /g, '+')}+Ghent`;
   return requestPromiseNative(`https://eu1.locationiq.com/v1/search.php?key=${process.env.LOCATIONIQ_API_KEY}&q=${apiLocation}&format=json`)
     .catch((e) => {
-      console.log(e.message);
+      console.error(e.message);
       agent.add(i18n.__('Location not found'));
     });
 }
@@ -30,7 +29,7 @@ function filterAttactionsNeighborhood(location, attractions, agent) {
   const latitude = parseFloat(location.lat);
   const longitude = parseFloat(location.lon);
 
-  // counts the attractions that are in the neighborhood
+  // counts the attractions that are located within the neighborhood
   let counter = 0;
 
   // radius of the neighborhood

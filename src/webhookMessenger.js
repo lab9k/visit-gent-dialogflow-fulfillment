@@ -26,7 +26,7 @@ class DialogFlowConnection {
    * connect to Dialogflow and initiate the sessionclient
    * @param {String} textMessage message send to Dialogflow
    * @param {String} sessionId id of session
-   * @param {String} languageCode language of the message
+   * @param {String} languageCode language of the user sending the message
    * @return response to the sended message
    */
   async sendTextMessageToDialogFlow(textMessage, sessionId, languageCode) {
@@ -100,7 +100,7 @@ module.exports = {
           const receivedMessage = webhookEvent.message.text;
           const senderId = webhookEvent.sender.id;
 
-          // get language of sender
+          // call get api to get the language of the sender
           request.get(`https://graph.facebook.com/${senderId}?fields=locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
               const languageCode = JSON.parse(response.body).locale;

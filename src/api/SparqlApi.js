@@ -22,7 +22,7 @@ function fetch(query) {
 
 module.exports = {
   /**
-   * fetch attractions for provided subject
+   * fetch attractions for given subject
    * @param {String} subject subject of attractions
    * @return fetched attractions
    */
@@ -33,7 +33,7 @@ module.exports = {
   },
 
   /**
-   * fetch events for provided date
+   * fetch events for given date
    * @param {String} date date of events
    * @return fetched events
    */

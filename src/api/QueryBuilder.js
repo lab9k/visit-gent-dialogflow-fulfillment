@@ -15,7 +15,7 @@ function formatDate(date) {
 
 module.exports = {
   /**
-   * build query to collect the attractions for the provided subject and selected language
+   * build query to collect the attractions for given subject and language of user
    * @param {String} subject category of attraction
    * @return query replaced with subject and language
    */
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   /**
-   * build query to collect the events for the provided date and selected language
+   * build query to collect the events for given date and language of user
    * @param {String} date date of events
    * @return query replaced with date and language
    */

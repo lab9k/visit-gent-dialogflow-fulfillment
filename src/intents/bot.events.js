@@ -7,11 +7,13 @@ const EventCard = require('../models/EventCard');
 module.exports = {
   key: 'bot.events',
   handler(agent) {
+    // DIALOGFLOW SLOT FILLING
     // checks if time is not defined
     if ((agent.context.get('time') === undefined || agent.context.get('time').parameters.time === '') && agent.parameters.eventTime === '') {
       agent.add(`${i18n.__('What day are you looking for events')}?`);
     } else {
       let time;
+
       // set time = parameter eventTime if not empty
       if (agent.parameters.eventTime !== '') {
         time = agent.parameters.eventTime;
@@ -19,6 +21,7 @@ module.exports = {
         // if parameter is empty set time = context time
         ({ time } = agent.context.get('time').parameters);
       }
+
       const fetched = fetchEvents(time);
       return fetched.then((res) => {
         // checks if result is empty

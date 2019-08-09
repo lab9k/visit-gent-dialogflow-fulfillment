@@ -20,6 +20,7 @@ module.exports = {
         let i;
         let card;
         agent.add(`${i18n.__('Tourist attractions found')}:`);
+        // returns the attractions
         for (i = 0; i < res.length && i < 10; i += 1) {
           card = new AttractionCard(res[i]);
           agent.add(card);
