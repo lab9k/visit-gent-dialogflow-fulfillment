@@ -182,7 +182,7 @@ module.exports = {
                       // Text
                       const text = sendMessage.text.text[0];
                       responseJSON.message.text = text;
-                      responses.push(responseJSON);
+                      responses.push(JSON.stringify(responseJSON));
                     } else if (sendMessage.message === 'card') {
                       // Card
                       isCard = true;
