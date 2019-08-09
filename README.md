@@ -42,14 +42,14 @@ EXAMPLE:
 
 * FAQ
 ```
-EXAMPLE
+EXAMPLE:
   User: Where can I park my car?
   Bot: Free car parks are available at the edge of the city...
 ```
 
 * Get events in Ghent
  ```
-Example:
+EXAMPLE:
   User: Events
   Bot: What day are you looking for events?
   User: Today
