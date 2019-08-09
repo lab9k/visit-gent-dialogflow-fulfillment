@@ -5,5 +5,7 @@ module.exports = {
   key: 'bot.attractions.subject.yes',
   handler(agent) {
     agent.add(`${i18n.__('Provide a location please')}`);
+    agent.add('1');
+    agent.add('2');
   },
 };

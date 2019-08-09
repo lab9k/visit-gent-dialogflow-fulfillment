@@ -86,6 +86,7 @@ module.exports = {
    */
   post(req, res) {
     const { body } = req;
+
     // Checks this is an event from a page subscription
     if (body.object === 'page') {
       // Iterates over each entry - there may be multiple if batched
@@ -93,10 +94,12 @@ module.exports = {
         // Gets the message. entry.messaging is an array, but
         // will only ever contain one message, so we get index 0
         const webhookEvent = entry.messaging[0];
+
         // only answer if the message is not null
         if (webhookEvent.message !== undefined) {
           const receivedMessage = webhookEvent.message.text;
           const senderId = webhookEvent.sender.id;
+
           // get language of sender
           request.get(`https://graph.facebook.com/${senderId}?fields=locale&access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`,
             (error, response) => {
@@ -165,7 +168,8 @@ module.exports = {
                   sendMessages.forEach((sendMessage) => {
                     if (sendMessage.message === 'quickReplies') {
                       // Quick Reply
-                      // For each object in the array quickReplies push a quickreply to the response JSON
+                      /* For each object in the array quickReplies
+                      push a quickreply to the response JSON */
                       sendMessage.quickReplies.quickReplies.forEach((reply) => {
                         quickReply = {
                           content_type: 'text',
