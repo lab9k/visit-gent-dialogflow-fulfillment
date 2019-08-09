@@ -35,37 +35,37 @@ Examples of interaction between the user and the chatbot:
 
 * Welcome
 ```
-  EXAMPLE:
+EXAMPLE:
   User: Hello
   Bot: Greetings! How can I assist?
 ```
 
 * FAQ
 ```
-  EXAMPLE
+EXAMPLE
   User: Where can I park my car?
   Bot: Free car parks are available at the edge of the city...
 ```
 
 * Get events in Ghent
  ```
- Example:
- User: Events
- Bot: What day are you looking for events?
- User: Today
- Bot: Top 3 events...
+Example:
+  User: Events
+  Bot: What day are you looking for events?
+  User: Today
+  Bot: Top 3 events...
 ```
 
 * Get events in Ghent for a specific day
  ```
- EXAMPLE:
- User: Events today
- Bot: Top 3 events...
+EXAMPLE:
+  User: Events today
+  Bot: Top 3 events...
 ```
 
 * Get activities in Ghent
 ```
-  EXAMPLE:
+EXAMPLE:
   User: What can I do in Ghent?
   Bot: What kind of activity would you like to do? Event or Tourist Attraction
   User: Tourist Attraction
@@ -80,7 +80,7 @@ Examples of interaction between the user and the chatbot:
 
 * Get a specific touristic attractions
 ```
-  EXAMPLE:
+EXAMPLE:
   User: I’m looking for museums
   Bot: Would you like to provide a location?
   User: Yes
