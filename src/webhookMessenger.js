@@ -182,7 +182,7 @@ module.exports = {
                       // Text
                       const text = sendMessage.text.text[0];
                       responseJSON.message.text = text;
-                      responses.push(responseJSON);
+                      responses.push(JSON.stringify(responseJSON));
                     } else if (sendMessage.message === 'card') {
                       // Card
                       isCard = true;
@@ -213,7 +213,7 @@ module.exports = {
                   // iterates over the different messages and post them to messenger
                   responses.forEach((textResponse) => {
                     request.post(`https://graph.facebook.com/v4.0/me/messages?access_token=${process.env.MESSENGER_PAGE_ACCESS_TOKEN}`)
-                      .form(textResponse);
+                      .form(JSON.parse(textResponse));
                   });
 
                   // post cards to messenger
