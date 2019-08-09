@@ -17,7 +17,7 @@ module.exports = {
   /**
    * build query to collect the attractions for the provided subject and selected language
    * @param {String} subject category of attraction
-   * @return query
+   * @return query replaced with subject and language
    */
   buildAttractionQuery(subject) {
     const query = QueryType.attractions;
@@ -29,7 +29,7 @@ module.exports = {
   /**
    * build query to collect the events for the provided date and selected language
    * @param {String} date date of events
-   * @return query
+   * @return query replaced with date and language
    */
   buildEventQuery(date) {
     let startDate = formatDate(date.startDate);

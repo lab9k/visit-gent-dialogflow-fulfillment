@@ -2,6 +2,7 @@ const express = require('express');
 const i18n = require('i18n');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const request = require('request');
 const fulfillment = require('./src/fulfillment');
 const webhook = require('./src/webhookMessenger');
 
@@ -25,4 +26,8 @@ i18n.configure({
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
+  request('https://lab9k-github-io-backend.herokuapp.com/repos', (error, res, body) => {
+    console.log(error);
+    console.log(body);
+  });
 });

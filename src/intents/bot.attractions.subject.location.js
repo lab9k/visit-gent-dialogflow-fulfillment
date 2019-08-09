@@ -49,6 +49,8 @@ function filterAttactionsNeighborhood(location, attractions, agent) {
       agent.add(new AttractionCard(attractions[i]));
     }
   }
+
+  // special message if there are no attractions within the radius
   if (counter === 0) {
     agent.add(i18n.__('No attractions found in the provided neighbourhood'));
   }

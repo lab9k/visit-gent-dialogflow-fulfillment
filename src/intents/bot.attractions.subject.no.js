@@ -7,15 +7,18 @@ const AttractionCard = require('../models/AttractionCard');
 module.exports = {
   key: 'bot.attractions.subject.no',
   handler(agent) {
-    const fetchedAttractions = fetchAttractions(agent.context
-      .get('botattractionssubject-followup').parameters.subject);
+    const { subject } = agent.context.get('botattractionssubject-followup').parameters;
+
+    // fetch attractions for given subject
+    const fetchedAttractions = fetchAttractions(subject);
+
     return fetchedAttractions.then((res) => {
+      // checks if the result is empty
       if (res.length < 1) {
         agent.add(i18n.__('No attractions found'));
       } else {
         let i;
         let card;
-        // todo: delete subject
         agent.add(`${i18n.__('Tourist attractions found')}:`);
         for (i = 0; i < res.length && i < 10; i += 1) {
           card = new AttractionCard(res[i]);
